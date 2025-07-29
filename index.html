@@ -254,44 +254,6 @@
             margin-bottom: 4px;
         }
 
-        /* Recently */
-        .recently-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .recently-item {
-            text-align: center;
-        }
-
-        .recently-image {
-            width: 100%;
-            height: 150px;
-            background: #e0e0e0;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            overflow: hidden;
-        }
-
-        .recently-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .recently-description {
-            font-size: 14px;
-            color: #333;
-        }
 
         /* Books & Media */
         .media-list {
@@ -453,7 +415,7 @@
                     <div class="note-preview">Internship</div>
                 </div>
                 <div class="note-item project-note" data-page="project-2" style="display: none;">
-                    <div class="note-title">Marketecture</div>
+                    <div class="note-title">Marketecture - AI-Content Generator</div>
                     <div class="note-preview">Internship</div>
                 </div>
                 <div class="note-item project-note" data-page="project-3" style="display: none;">
@@ -470,10 +432,6 @@
                 </div>
                 <div class="note-item" data-page="featured">
                     <div class="note-title">Featured On</div>
-                    <div class="note-preview"></div>
-                </div>
-                <div class="note-item" data-page="recently">
-                    <div class="note-title">Recently</div>
                     <div class="note-preview"></div>
                 </div>
                 <div class="note-item" data-page="media">
@@ -499,7 +457,7 @@
                     <div class="name">Elanu Karakus</div>
                     <div class="title">CS @ Stanford'28 | Rise Fellow'23 | Technology + Impact</div>
                     <div class="bio">
-                        <p>Hi, I’m Elanu, a second-year CS student at Stanford with a minor in Management Science & Engineering. I’m originally from Turkey, and outside of class, you’ll often find me reading, tinkering with side projects, cafe-hopping with friends, or cruising on my motorbike.
+                        <p>Hi, I’m Elanu, a second-year CS student at Stanford with a minor in Management Science & Engineering. I’m originally from Turkey, and outside of class, you’ll often find me reading, tinkering with side projects, or cafe-hopping with friends.
                             <br>
                             <br>
 
@@ -542,7 +500,7 @@
                             <div class="project-tech">LLMs and Model Context Protocol</div>
                         </div>
                         <div class="project-card" onclick="showProject('project-2')">
-                            <div class="project-title">Marketecture</div>
+                            <div class="project-title">Marketecture - AI-Content Generator</div>
                             <div class="project-description">Internship at a marketing firm testing social media content generation with AI</div>
                             <div class="project-tech">Product Strategy</div>
                             <div class="project-tech">UI/UX</div>
@@ -595,53 +553,215 @@
                     <h2>Marketecture</h2>
                     <p><strong>Role:</strong> AI & Marketing Intern</p>
                     <br>
+                  
                     <h3>Overview</h3>
-                    <p>Internship included building one key prohect: A client-facing AI content generator trained with the firm's assets</p>
+                    <p>
+                      As an AI & Marketing Intern at a social media marketing firm, I led the development of an internal AI-powered platform to automate content generation for clients.
+                      The tool was designed to deeply understand a brand’s voice and positioning through onboarding inputs and documents, and generate highly personalized content and strategy recommendations.
+                    </p>
                     <br>
+                  
+                    <h3>Problem</h3>
+                    <p>
+                      The firm’s clients needed consistent, high-quality marketing content that aligned with their brand voice—but internal consultants were spending significant time writing briefs and generating ideas manually.
+                      We saw an opportunity to streamline this with a custom AI tool that understood each brand's unique identity and tone.
+                    </p>
+                    <br>
+                  
+                    <h3>User Research Insights</h3>
+                    <p>
+                      Through conversations with the firm, I identified key pain points:
+                      <ul>
+                        <li>Generic AI tools like ChatGPT lacked context and produced off-brand outputs</li>
+                        <li>ChatGPT pro was adept at generating content but it meant the firm staff had to create GPT's for each brand and their clients weren't always tech savy enough to figure out how to best make use of their personal GPT.</li>
+                        <li>Firm staff wasted time rewriting or re-explaining brand tone</li>
+                        <li>Clients often needed inspiration and competitor context alongside text suggestions</li>
+                      </ul>
+                    </p>
+                    <br>
+                  
+                    <h3>Product Approach</h3>
+                    <p>
+                      I built the tool using Retrieval-Augmented Generation (RAG), integrating OpenAI's API with a custom knowledge base sourced from past client work, internal brand strategy docs, and onboarding transcripts. 
+                      I also designed a brand onboarding flow that generated a persistent "brand profile"—a rich context layer used to ground all content generation consisting of an inspiration bank and customer avatar.
+                    </p>
+                    <br>
+                  
                     <h3>Key Features</h3>
-                    <p>• Onboarding with brand assets and meeting transcripts to create a brand profile<br>• Chatbot to generate content or content strategy, built with  retrieval augmented generation using the firm's extensive strategic documentation as a knowledge base<br>• Profile with customer avatar, brand tone, inspiration bank; all generated during onboarding<br>• Competitor content analyzer</p>
+                    <ul>
+                      <li>AI chatbot with retrieval-augmented content generation grounded in firm-specific strategy docs</li>
+                      <li>Brand onboarding flow that creates a profile with customer avatar, tone guidelines, and example voice</li>
+                      <li>Competitor analyzer that surfaces stylistic differences between brands using scraped content</li>
+                      <li>Inspiration bank and copy templates tailored to each brand’s vibe and goals</li>
+                    </ul>
                     <br>
+                  
                     <h3>Demo</h3>
-                </div>
+                    <p>[Insert demo video]</p>
+                    <br>
+                  
+                    <h3>Links</h3>
+                    <ul>
+                      <li><a href="https://www.figma.com/board/fTl4skdq8e2fnJoRDXG2Sw/Marketecture?node-id=0-1&t=jgm0Xs1OkqwnQzDv-1">FigJam Brainstorming</a></li>
+                    </ul>
+                    <br>
+                  
+                    <h3>What I’d Do Next</h3>
+                    <p>
+                      I’d develop a feedback loop for human-in-the-loop editing so the model can learn from brand strategist corrections over time. I’d also explore integrations with publishing tools like Webflow or HubSpot for seamless content deployment.
+                    </p>
+                    <br>
+                  
+                    <h3>What This Project Says About Me</h3>
+                    <p>
+                      I love building tools that combine deep brand thinking with AI’s creative power. This project reflects how I approach technical problem-solving with a product mindset, always focused on real user needs and future scalability.
+                    </p>
+                  </div>
+                  
 
                 <div class="page" id="project-3">
                     <h2>Beeline TagTeam Reader</h2>
-                    <p><strong>Coursework:</strong> CS51/52</p>
+                    <p><strong>Coursework:</strong> CS51/52 (Project-based social impact x software engineering class)</p>
                     <br>
+                  
                     <h3>Overview</h3>
-                    <p>Collaborated with peers to identify a problem within education, design a solution, and build a demo for partner organization, Beeline.</p>
+                    <p>
+                      Built in collaboration with peers for Beeline, an edtech startup. We designed and prototyped an AI-powered reading platform for early learners.
+                      I contributed to product direction, UX design decisions, and full-stack development using MERN and Anthropic's Claude API.
+                    </p>
                     <br>
+                  
+                    <h3>Problem</h3>
+                    <p>
+                      Many students—especially in under-resourced schools—lack access to leveled, engaging reading material. Teachers struggle to find content that matches
+                      both students’ interests and reading levels. Beeline wanted to explore a collaborative and AI-enhanced solution to support early literacy.
+                    </p>
+                    <br>
+                  
+                    <h3>User Research Insights</h3>
+                    <p>
+                      We interviewed teachers and reviewed EdTech tools in use today. Key findings:
+                      <ul>
+                        <li>    Students stay more engaged when reading material is tailored to their interests</li>
+                        <li>    Teachers need quick ways to monitor comprehension without heavy grading load</li>
+                        <li>    Collaborative or gamified formats increase participation</li>
+                      </ul>
+                    </p>
+                    <br>
+                  
+                    <h3>Product Approach</h3>
+                    <p>
+                      We focused on building a lightweight, modular prototype to test the core hypothesis: Can AI-generated readings + collaborative sessions improve student engagement and comprehension?
+                    </p>
+                    <br>
+                  
                     <h3>Key Features</h3>
-                    <p>• Collaborative learning through Kahoot-like sessions for users<br>• AI-generated readings in topics users select<br>• AI-generated quiz based on readings<br>• Result send out to teachers</p>
+                    <ul>
+                      <li>AI-generated short readings based on chosen topics and reading level</li>
+                      <li>Quiz generation tied directly to the reading content</li>
+                      <li>Kahoot-style collaborative sessions for peer learning</li>
+                      <li>Automatic results sharing with teachers to support formative assessment</li>
+                    </ul>
                     <br>
+                  
                     <h3>Demo</h3>
-                </div>
+                    <p>[Embed or link]</p>
+                    <br>
+                  
+                    <h3>Links</h3>
+                    <ul>
 
-                <div class="page" id="project-4">
+                      <li><a href="https://www.figma.com/design/WiTMDfH6XOUXHPsi5m7ATE/BeeLine-Medium-Fi---High-Fi?node-id=111-2&t=qxZz6Npjn2YYM0xN-1">Figma Prototype</a></li>
+                    </ul>
+                    <br>
+                  
+                    <h3>What I’d Do Next</h3>
+                    <p>
+                      I’d run small pilot sessions with students and educators to observe engagement firsthand, then iterate on UX and add voice input for accessibility. I’d also explore using Retrieval-Augmented Generation (RAG) for deeper comprehension questions.
+                    </p>
+                    <br>
+                  
+                    <h3>What This Project Says About Me</h3>
+                    <p>
+                      This project reflects my interest in building AI tools that solve real-world problems, especially in learning and equity. I love working at the intersection of tech, design, and human needs.
+                    </p>
+                  </div>
+                  
+                  <div class="page" id="project-4">
                     <h2>Cape Colony Land Grants Map</h2>
-                    <p><strong>Role:</strong> Research Assistant</p>
+                    <p><strong>Role:</strong> Research Assistant (Digital History Project)</p>
                     <br>
+                  
                     <h3>Overview</h3>
-                    <p>Digital restoration of the document "The Southwestern Cape Colony, 1657–1750: Freehold Land Grants"</p>
+                    <p>
+                      I supported the digital restoration of “The Southwestern Cape Colony, 1657–1750: Freehold Land Grants,” a historical text documenting early Dutch settlements in South Africa.
+                      The goal was to make the information spatially explorable and accessible to researchers, educators, and the public.
+                    </p>
                     <br>
+                  
+                    <h3>Problem</h3>
+                    <p>
+                      The original document existed only as a scanned printout, making it difficult to analyze spatial patterns or connect land grants with historical timelines.
+                      Our challenge was to transform it into a georeferenced, interactive dataset and map-based interface.
+                    </p>
+                    <br>
+                  
                     <h3>Process</h3>
-                    <p>• Uploaded the scanned version of the document to QGIS<br>• Georeferenced each farm on GIS<br>• Exported the dataset with coordinates of each farm<br>•Built a web interface to search for farms, observe yearly change, and owners.</p>
+                    <ul>
+                      <li>Uploaded and aligned scanned maps using QGIS</li>
+                      <li>Georeferenced and digitized each individual land grant with coordinates and metadata</li>
+                      <li>Exported the dataset into a usable format for frontend development</li>
+                      <li>Built a web interface allowing users to search by farm name, owner, and year</li>
+                    </ul>
                     <br>
-                    <h3><a href="https://colonial-map.vercel.app/">Demo</a></h3>
-                </div>
+                  
+                    <h3>Demo</h3>
+                    <p><a href="https://colonial-map.vercel.app/" target="_blank">Live Demo</a></p>
+                    <br>
+                  
+                    <h3>What This Project Says About Me</h3>
+                    <p>
+                      I enjoy bringing history to life through digital tools. This project reflects my interest in combining archival work, spatial data, and web interfaces to tell stories that are otherwise hard to access.
+                    </p>
+                  </div>
 
-                <div class="page" id="project-5">
+                  <div class="page" id="project-5">
                     <h2>When Merit Meets Reality</h2>
-                    <p><strong>For</strong> Kode With Klossy x Black Wealth Data Center Challenge</p>
+                    <p><strong>Challenge:</strong> Kode With Klossy × Black Wealth Data Center</p>
                     <br>
+                  
                     <h3>Overview</h3>
-                    <p>A data storytelling experience to raise awareness for wage gap in the US.</p>
+                    <p>
+                      A data storytelling web experience designed to raise awareness around the racial wage gap in the U.S. workforce, especially the disparities Black women face even when they meet or exceed academic and professional "merit" benchmarks.
+                    </p>
                     <br>
+                  
+                    <h3>Problem</h3>
+                    <p>
+                      BWDC provides rich datasets about racial income disparities, but raw numbers often fail to emotionally engage or educate general audiences.
+                      My goal was to turn the data into a story that is both accessible and powerful.
+                    </p>
+                    <br>
+                  
                     <h3>Process</h3>
-                    <p>• Look through BWDC's datasets to get inspired for a story to be told through data<br>• Used p5.js to create animations and data visualizations</p>
+                    <ul>
+                      <li>Explored BWDC datasets to identify key narrative moments—wage comparisons, education levels, and generational wealth gaps</li>
+                      <li>Designed a linear scrollytelling experience using p5.js animations to illustrate data over time and context</li>
+                      <li>Wrote narrative copy to guide users through the story with empathy and clarity</li>
+                    </ul>
                     <br>
-                    <h3><a href="https://elnukk.github.io/merit-meets-reality/">Demo</a></h3>
-                </div>
+                  
+                    <h3>Demo</h3>
+                    <p><a href="https://elnukk.github.io/merit-meets-reality/" target="_blank">Live Demo</a></p>
+                    <br>
+                  
+                    <h3>What This Project Says About Me</h3>
+                    <p>
+                      I care about making data human. This project reflects my commitment to designing with purpose and using technical skills to spotlight structural inequities in a digestible, compelling way.
+                    </p>
+                  </div>
+                  
+                  
 
                 <!-- Featured On Page -->
                 <div class="page" id="featured">
@@ -668,37 +788,6 @@
 
                     </div>
                 </div>
-
-                <!-- Recently Page -->
-                <div class="page" id="recently">
-                    <div class="recently-grid">
-                        <div class="recently-item">
-                            <div class="recently-image">
-                                <img src="surfing.jpeg" alt="Urban surfing">
-                            </div>
-                            <div class="recently-description">Went urban surfing in Rotterdam, Netherlands!</div>
-                        </div>
-                        <div class="recently-item">
-                            <div class="recently-image">
-                                <img src="paris.jpeg" alt="Solo trip to Paris">
-                            </div>
-                            <div class="recently-description">Solo travelled to Paris.</div>
-                        </div>
-                        <div class="recently-item">
-                            <div class="recently-image">
-                                <img src="coldplay.jpeg" alt="Concert">
-                            </div>
-                            <div class="recently-description">Went to a Coldplay concert at Stanford!</div>
-                        </div>
-                        <div class="recently-item">
-                            <div class="recently-image">
-                                <img src="move.jpeg" alt="Moved out">
-                            </div>
-                            <div class="recently-description">Moved out of my freshman dorm. Packing was a nightmare.</div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Books & Media Page -->
                 <div class="page" id="media">
                     <h2>Recently read</h2>
@@ -838,12 +927,11 @@
                 'bio': 'Bio',
                 'projects': 'Projects',
                 'project-1': 'Digital Green',
-                'project-2': 'Marketecture',
+                'project-2': 'Marketecture - AI-Content Generator',
                 'project-3': 'Beeline TagTeam Reader',
                 'project-4': 'Cape Colony Land Grants Map',
                 'project-5': 'When Merit Meets Reality',
                 'featured': 'Featured On',
-                'recently': 'Recently',
                 'media': 'Books & Media',
                 'impossible': 'Impossible List'
             };
