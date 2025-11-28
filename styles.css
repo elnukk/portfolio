@@ -1,0 +1,564 @@
+/* ====================================
+   BASE STYLES & FONTS
+   ==================================== */
+   body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(255, 147, 126, 0.3) 100%);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    color: #1f2937;
+}
+
+.handwritten-name {
+    font-family: 'Permanent Marker', cursive;
+    letter-spacing: 0.02em;
+}
+
+/* ====================================
+   TEXTURE & EFFECTS
+   ==================================== */
+.texture-overlay {
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    mix-blend-mode: overlay;
+}
+
+/* ====================================
+   INTRO / HERO SECTION
+   ==================================== */
+.headshot-frame {
+    margin-top: 220px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 85, 85, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: #f9fafb;
+}
+
+.headshot-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.intro-title {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    transform: rotate(-1deg);
+    display: inline-block;
+    color: #111827;
+}
+
+.intro-text {
+    max-width: 45rem;
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.intro-text p {
+    margin-bottom: 1rem;
+}
+
+.looking-text {
+    color: #6b7280;
+    font-style: italic;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.25rem;
+    transform: rotate(-0.5deg);
+}
+
+.highlight-green {
+    background: linear-gradient(180deg, transparent 60%, rgba(163, 215, 138, 0.5) 60%);
+    padding: 0 6px;
+}
+
+.highlight-coral {
+    background: linear-gradient(180deg, transparent 60%, rgba(255, 85, 85, 0.5) 60%);
+    padding: 0 6px;
+}
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4b5563;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: #A3D78A;
+    transform: scale(1.05) !important;
+}
+
+/* ====================================
+   SECTION HEADERS
+   ==================================== */
+.section-header {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 800;
+    display: inline-block;
+    color: #111827;
+}
+
+/* ====================================
+   POLAROID CARDS (Featured & Projects)
+   ==================================== */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.projects-grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .projects-grid-2x2 {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+}
+
+.polaroid-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 12px;
+    padding-bottom: 40px;
+    box-shadow: 
+        0 4px 6px rgba(0,0,0,0.1),
+        0 1px 3px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.polaroid-card:hover {
+    transform: rotate(0deg) scale(1.02) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-color: rgba(163, 215, 138, 0.4);
+}
+
+.tape-accent {
+    position: absolute;
+    width: 80px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.6);
+    top: -10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.polaroid-image {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    clip-path: polygon(
+        0% 0%, 2% 1%, 5% 0%, 8% 2%, 11% 0%, 15% 1%, 18% 0%, 22% 1%, 
+        25% 0%, 28% 2%, 32% 0%, 35% 1%, 38% 0%, 42% 2%, 45% 0%, 
+        48% 1%, 52% 0%, 55% 2%, 58% 0%, 62% 1%, 65% 0%, 68% 2%, 
+        72% 0%, 75% 1%, 78% 0%, 82% 2%, 85% 0%, 88% 1%, 92% 0%, 
+        95% 2%, 98% 0%, 100% 1%, 100% 100%, 0% 100%
+    );
+}
+
+.polaroid-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-text {
+    color: #9ca3af;
+    font-size: 0.875rem;
+    font-family: 'Indie Flower', cursive;
+}
+
+.polaroid-caption {
+    text-align: center;
+}
+
+.polaroid-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: #111827;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.25rem;
+}
+
+.polaroid-tech {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-family: 'Monaco', 'Courier New', monospace;
+}
+
+/* ====================================
+   PROFESSIONAL EXPERIENCE
+   ==================================== */
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.experience-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+    .experience-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: start;
+    }
+}
+
+.experience-role {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.experience-company {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.experience-stack{
+    margin-top: 10px;
+    color: #6b7280;
+    font-size: 0.75rem;
+    font-style: italic;
+}
+
+.experience-date {
+    font-size: 1.25rem;
+    color: #5b5c5e;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1rem;
+}
+
+.experience-description {
+    color: #4b5563;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* ====================================
+   AWARDS & SPEAKING
+   ==================================== */
+.awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.award-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(163, 215, 138, 0.4);
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.award-section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #A3D78A;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.5rem;
+}
+
+.award-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.award-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #111827;
+    margin-bottom: 0.25rem;
+}
+
+.award-description {
+    color: #6b7280;
+    font-size: 0.75rem;
+}
+
+/* ====================================
+   FOOTER
+   ==================================== */
+.footer-text {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.75rem;
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+    border-top: 1px solid #e5e7eb;
+    font-family: 'Indie Flower', cursive;
+    font-size: 0.875rem;
+    transform: rotate(-0.3deg);
+}
+
+/* ====================================
+   RESPONSIVE ADJUSTMENTS
+   ==================================== */
+@media (max-width: 768px) {
+    .intro-title {
+        font-size: 2.5rem;
+    }
+    
+    .section-header {
+        font-size: 1.75rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.polaroid-card {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.polaroid-card:hover .polaroid-title {
+    color: #A3D78A;
+}
+
+
+/* ====================================
+   GEOGUESSER SECTION
+   ==================================== */
+   .geoguessr-description {
+    color: #4b5563;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.geoguessr-restart-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem auto 0;
+    background: linear-gradient(135deg, #A3D78A 0%, #8bc774 100%);
+    color: #1f2937;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(163, 215, 138, 0.3);
+}
+
+.geoguessr-restart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(163, 215, 138, 0.4);
+}
+
+.geoguessr-restart-btn svg {
+    flex-shrink: 0;
+}
+
+.geoguessr-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.geoguessr-screen {
+    text-align: center;
+}
+
+.geoguessr-start-btn {
+    background: linear-gradient(135deg, #A3D78A 0%, #8bc774 100%);
+    color: #1f2937;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transform: rotate(-1deg);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(163, 215, 138, 0.3);
+    font-family: 'Indie Flower', cursive;
+}
+
+.geoguessr-start-btn:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 0 6px 20px rgba(163, 215, 138, 0.4);
+}
+
+.geoguessr-photo-container {
+    margin-bottom: 2rem;
+}
+
+.geoguessr-polaroid {
+    margin: 0 auto;
+    max-width: 500px;
+    position: relative;
+}
+
+.geoguessr-image-wrapper {
+    aspect-ratio: 4/4;
+    overflow: hidden;
+    background: #e5e7eb;
+    position: relative;
+    clip-path: polygon(
+        0% 0%, 2% 1%, 5% 0%, 8% 2%, 11% 0%, 15% 1%, 18% 0%, 22% 1%, 
+        25% 0%, 28% 2%, 32% 0%, 35% 1%, 38% 0%, 42% 2%, 45% 0%, 
+        48% 1%, 52% 0%, 55% 2%, 58% 0%, 62% 1%, 65% 0%, 68% 2%, 
+        72% 0%, 75% 1%, 78% 0%, 82% 2%, 85% 0%, 88% 1%, 92% 0%, 
+        95% 2%, 98% 0%, 100% 1%, 100% 100%, 0% 100%
+    );
+}
+
+.geoguessr-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.geoguessr-timer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 85, 85, 0.9);
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-family: 'Permanent Marker', cursive;
+    z-index: 10;
+}
+
+.geoguessr-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 5;
+}
+
+.geoguessr-overlay-content {
+    text-align: center;
+    max-width: 400px;
+}
+
+.geoguessr-location {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-family: 'Indie Flower', cursive;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.geoguessr-fact {
+    color: #f3f4f6;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.geoguessr-next-btn {
+    background: linear-gradient(135deg, #FF5555 0%, #ff4444 100%);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 85, 85, 0.3);
+}
+
+.geoguessr-next-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 85, 85, 0.4);
+}
+
+.geoguessr-end-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(163, 215, 138, 0.4);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: rotate(0.5deg);
+}
+
+.geoguessr-end-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1rem;
+    font-family: 'Indie Flower', cursive;
+}
+
+.geoguessr-end-message {
+    color: #4b5563;
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .geoguessr-polaroid {
+        max-width: 100%;
+    }
+    
+    .geoguessr-location {
+        font-size: 1.5rem;
+    }
+    
+    .geoguessr-fact {
+        font-size: 0.9rem;
+    }
+}

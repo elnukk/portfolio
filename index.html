@@ -1,981 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elanu's Notes</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f2f1f6;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 280px;
-            background: #ffffff;
-            border-right: 1px solid #e0e0e0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar-header {
-            padding: 20px 16px 16px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .sidebar-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .sidebar-subtitle {
-            font-size: 14px;
-            color: #666;
-        }
-
-        .notes-list {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .note-item {
-            padding: 12px 16px;
-            border-bottom: 1px solid #f0f0f0;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            position: relative;
-        }
-
-        .note-item:hover {
-            background: #f8f8f8;
-        }
-
-        .note-item.active {
-            background: #ffcc02;
-        }
-
-        .note-item.folder {
-            font-weight: 600;
-            color: #007aff;
-        }
-
-        .note-item.folder::before {
-            content: "📁";
-            margin-right: 8px;
-        }
-
-        .note-item.project-note {
-            margin-left: 20px;
-            font-size: 14px;
-        }
-
-        .note-item.project-note::before {
-            margin-right: 8px;
-        }
-
-        .note-title {
-            font-size: 16px;
-            font-weight: 500;
-            color: #333;
-            margin-bottom: 4px;
-        }
-
-        .note-preview {
-            font-size: 14px;
-            color: #666;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .content-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid #e0e0e0;
-            background: #fafafa;
-        }
-
-        .content-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .content-body {
-            flex: 1;
-            padding: 24px;
-            overflow-y: auto;
-            line-height: 1.6;
-        }
-
-        /* Page Styles */
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        .bio-page {
-            max-width: 600px;
-        }
-
-        .headshot {
-            width: 120px;
-            height: 120px;
-            border-radius: 60px;
-            background-image: url("headshot.jpeg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            color: #666;
-        }
-
-
-        .name {
-            font-size: 32px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .title {
-            font-size: 18px;
-            color: #007aff;
-            margin-bottom: 24px;
-            font-weight: 500;
-        }
-
-        .bio {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 32px;
-        }
-
-        .skills-section {
-            margin-top: 32px;
-        }
-
-        .skills-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 16px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        .skill-category h4 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #666;
-            margin-bottom: 8px;
-        }
-
-        .skill-category p {
-            font-size: 14px;
-            color: #333;
-        }
-
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            gap: 16px;
-        }
-
-        .project-card {
-            background: #f8f8f8;
-            border-radius: 8px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .project-card:hover {
-            background: #f0f0f0;
-            transform: translateY(-1px);
-        }
-
-        .project-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .project-description {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 12px;
-        }
-
-        .project-tech {
-            font-size: 12px;
-            color: #007aff;
-            background: #e6f3ff;
-            padding: 4px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-right: 6px;
-            margin-bottom: 4px;
-        }
-
-
-        /* Books & Media */
-        .media-list {
-            list-style: none;
-        }
-
-        .media-item {
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 16px;
-            color: #333;
-            position: relative;
-            padding-left: 24px;
-        }
-
-        .media-item::before {
-            content: "•";
-            color: #007aff;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        .media-item:last-child {
-            border-bottom: none;
-        }
-
-        /* Impossible List */
-        .impossible-list {
-            list-style: none;
-        }
-
-        .impossible-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 0;
-            font-size: 16px;
-            color: #333;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .impossible-item:last-child {
-            border-bottom: none;
-        }
-
-        .checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            margin-right: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .checkbox.checked {
-            background: #007aff;
-            border-color: #007aff;
-            color: white;
-        }
-
-        .checkbox.checked::after {
-            content: "✓";
-            font-size: 12px;
-        }
-
-        .impossible-item.completed {
-            opacity: 0.6;
-            text-decoration: line-through;
-        }
-
-        /* Featured On */
-        .featured-list {
-            display: grid;
-            gap: 16px;
-        }
-
-        .featured-item {
-            background: #f8f8f8;
-            border-radius: 8px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        .featured-logo {
-            width: 60px;
-            height: 60px;
-            background: #e0e0e0;
-            border-radius: 8px;
-            margin-right: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .featured-info h3 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 4px;
-        }
-
-        .featured-info p {
-            font-size: 14px;
-            color: #666;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                height: 200px;
-                border-right: none;
-                border-bottom: 1px solid #e0e0e0;
-            }
-
-            .notes-list {
-                display: flex;
-                overflow-x: auto;
-                overflow-y: hidden;
-            }
-
-            .note-item {
-                min-width: 150px;
-                border-right: 1px solid #f0f0f0;
-                border-bottom: none;
-            }
-        }
-    </style>
+    <title>Elanu's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Indie+Flower&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
-
 <body>
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-title">Notes</div>
-                <div class="sidebar-subtitle">Elanu Karakus</div>
+    <div class="texture-overlay"></div>
+
+    <!-- Contained width -->
+    <div class="max-w-4xl mx-auto relative z-10 pt-12">
+        
+        <!-- INTRO/HERO -->
+        <section class="mb-20">
+            <!-- Headshot -->
+            <div class="mb-6">
+                <div class="headshot-frame">
+                    <img src="src/1725432892816.jpeg" alt="Elanu" class="headshot-img">
+                </div>
             </div>
-            <div class="notes-list">
-                <div class="note-item active" data-page="bio">
-                    <div class="note-title">Bio</div>
-                    <div class="note-preview"></div>
+
+            <div class="mb-6">
+                <h1 class="intro-title">
+                    <span>Hey! I'm </span>
+                    <span class="handwritten-name">Elanu.</span>
+                </h1>
+            </div>
+            
+            <div class="intro-text">
+                <p>
+                    Studying CS @ Stanford. I've shipped production features to <span class="highlight-green font-semibold">5M+ users</span>, 
+                    prototyped carbon tools for Shell, won hackathons, secured <span class="highlight-coral font-semibold">$5K+ in grants</span>, 
+                    and crashed a motorbike on my first ride (the scar's still there). 
+                </p>
+                
+            </div>
+
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/elanu-karakus/" class="social-link" style="transform: rotate(-1deg);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    <span class="font-medium"></span>
+                </a>
+                <a href="https://github.com/elnukk/elnukk" class="social-link" style="transform: rotate(1deg);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                    <span class="font-medium"></span>
+                </a>
+                <a href="https://medium.com/@elanu.karakus" class="social-link" style="transform: rotate(-0.5deg);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                    <span class="font-medium"></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- HIGHLIGHTS -->
+        <section class="mb-24">
+            <h2 class="section-header" style="transform: rotate(-1deg);">
+                <span class="highlight-green">Highlights</span>
+            </h2>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <a href="https://huggingface.co/spaces/elanuk/mcp-hf" target="_blank" class="polaroid-card" style="transform: rotate(-2deg);">
+                    <div class="tape-accent" style="left: 50%; transform: translateX(-50%) rotate(-5deg);"></div>
+                    <div class="polaroid-image">
+                        <img src="src/mcp1.png" alt="MCP for Digital Green" class="polaroid-photo">  
+                    </div>
+                    <div class="polaroid-caption">
+                        <h3 class="polaroid-title">MCP for Digital Green</h3>
+                        <p class="polaroid-tech">FastAPI • Docker • HuggingFace</p>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="https://valiant-peace-959.notion.site/Aeifloria-Smart-Flower-for-Bee-Pollination-Increase-187ee57654ec80b382a4e85ed80b6898" target="_blank" class="polaroid-card" style="transform: rotate(3deg);">
+                    <div class="tape-accent" style="right: 1rem; transform: rotate(10deg);"></div>
+                    <div class="polaroid-image">
+                        <img src="src/aei.png" alt="Aeifloria" class="polaroid-photo">
+                    </div>
+                    <div class="polaroid-caption">
+                        <h3 class="polaroid-title">Aeifloria</h3>
+                        <p class="polaroid-tech">Product Design • Climate • Grants</p>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="https://tksworld.notion.site/Leveraging-LLMs-to-Minimize-the-Time-Needed-for-Carbon-Credit-Project-Verification-by-Elanu-Karakus--6b48432b0ed848fcad6175095ebe65ec" target="_blank" class="polaroid-card" style="transform: rotate(-1.5deg);">
+                    <div class="tape-accent" style="left: 1rem; transform: rotate(-8deg);"></div>
+                    <div class="polaroid-image">
+                        <img src="src/nbs.png" alt="VerifyX" class="polaroid-photo">
+                    </div>
+                    <div class="polaroid-caption">
+                        <h3 class="polaroid-title">VerifyX</h3>
+                        <p class="polaroid-tech">LLM • Carbon • Shell</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- PROFESSIONAL EXPERIENCE -->
+        <section class="mb-24">
+            <h2 class="section-header" style="transform: rotate(1deg);">
+                <span class="highlight-coral">Professional Experience</span>
+            </h2>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-role">Research Assistant</h3>
+                        <p class="experience-company">Stanford Graduate School of Business</p>
+                        <p class="experience-stack">Python (Pandas, NumPy, Stats) • Qualtrics • FastAPI</p>
+                    </div>
+                    <span class="experience-date">09/2025 - Present</span>
                 </div>
-                <div class="note-item folder" data-page="projects">
-                    <div class="note-title">Projects</div>
+                <p class="experience-description">
+                    Process data (cleaning, regression and correlation analysis, etc) to study the impact of AI memory on users. 
+                </p>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-role">Product & Software Intern</h3>
+                        <p class="experience-company">Digital Green</p>
+                        <p class="experience-stack">Python • FastAPI • React • Docker • HuggingFace</p>
+                    </div>
+                    <span class="experience-date">06 – 09/2025</span>
                 </div>
-                <div class="note-item project-note" data-page="project-1" style="display: none;">
-                    <div class="note-title">Digital Green</div>
-                    <div class="note-preview">Internship</div>
+                <p class="experience-description">
+                    Designed, built, and helped ship 2 user engagement features (nudges + starter prompts) for an app with 5M+ users.
+                </p>
+            </div>
+
+            <div class="experience-list">
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-role">AI Intern</h3>
+                            <p class="experience-company">Marketecture</p>
+                            <p class="experience-stack">SQL • Streamlit • RAG • OpenAI API</p>
+                        </div>
+                        <span class="experience-date">03 – 05/2025</span>
+                    </div>
+                    <p class="experience-description">
+                        Built a workflow for efficient content management across client accounts.
+                    </p>
                 </div>
-                <div class="note-item project-note" data-page="project-2" style="display: none;">
-                    <div class="note-title">Marketecture - AI-Content Generator</div>
-                    <div class="note-preview">Internship</div>
+
+            </div>
+        </section>
+
+        <!-- PROJECTS & EXPERIMENTS -->
+        <section class="mb-24">
+            <h2 class="section-header" style="transform: rotate(-0.5deg);">
+                <span class="highlight-green">Projects & Experiments</span>
+            </h2>
+            
+            <div class="projects-grid-2x2">
+                <a href="https://docs2notion.com/" target="_blank" class="polaroid-card" style="transform: rotate(1deg);">
+                    <div class="tape-accent" style="left: 50%; transform: translateX(-50%) rotate(6deg);"></div>
+                    <div class="polaroid-image">
+                        <img src="src/docs2notion.png" alt="Docs2Notion" class="polaroid-photo">
+                    </div>
+                    <div class="polaroid-caption">
+                        <h3 class="polaroid-title">Docs2Notion</h3>
+                        <p class="polaroid-tech">Node.js • Vercel</p>
+                    </div>
+                </a>
+
+                <a href="https://colonial-map.vercel.app/" target="_blank" class="polaroid-card" style="transform: rotate(-1.5deg);">
+                    <div class="tape-accent" style="right: 1.5rem; transform: rotate(-7deg);"></div>
+                    <div class="polaroid-image">
+                        <img src="src/cesta.png" alt="CESTA Digital Restoration" class="polaroid-photo">
+                    </div>
+                    <div class="polaroid-caption">
+                        <h3 class="polaroid-title">CESTA Digital Restoration</h3>
+                        <p class="polaroid-tech">QGIS • React</p>
+                    </div>
+                </a>
+
+                <a href="#" target="_blank" class="polaroid-card" style="transform: rotate(0.5deg);">
+                    <div class="tape-accent" style="left: 1rem; transform: rotate(8deg);"></div>
+                    <div class="polaroid-image">
+                        <img src="src/cs51.png" alt="CS51/52 Learning Platform" class="polaroid-photo">
+                    </div>
+                    <div class="polaroid-caption">
+                        <h3 class="polaroid-title">Beeline Reader x CS51</h3>
+                        <p class="polaroid-tech">MongoDB • Express • React • Node</p>
+                    </div>
+                </a>
+
+                <a href="https://medium.com/@elanu.karakus/a-magical-fish-captures-co2-in-the-ocean-d92ee3e7d6e8" target="_blank" class="polaroid-card" style="transform: rotate(-0.8deg);">
+                    <div class="tape-accent" style="right: 2rem; transform: rotate(-10deg);"></div>
+                    <div class="polaroid-image">
+                        <img src="src/arctic.png" alt="CO2 Capture Robot Simulation" class="polaroid-photo">
+                    </div>
+                    <div class="polaroid-caption">
+                        <h3 class="polaroid-title">CO2 Capture Robot Sim</h3>
+                        <p class="polaroid-tech">Python • Algorithms • Robotics</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- AWARDS & SPEAKING -->
+        <section class="mb-20">
+            <h2 class="section-header" style="transform: rotate(0.8deg);">
+                <span class="highlight-coral">Awards & Speaking</span>
+            </h2>
+            
+            <div class="awards-grid">
+                <!-- Honors -->
+                <div class="award-card" style="transform: rotate(-1deg);">
+                    <h3 class="award-section-title">Honors</h3>
+                    <div class="award-list">
+                        <div>
+                            <h4 class="award-name">TreeHacks Sustainability Winner</h4>
+                            <p class="award-description">Won one of 4 track prizes among 1000 participants with a prototype for a marketplace connecting farmers and buyers.</p>
+                        </div>
+                        <div>
+                            <h4 class="award-name">Earth Prize Scholar</h4>
+                            <p class="award-description">North America Finalist</p>
+                        </div>
+                        <div>
+                            <h4 class="award-name">Moonshot Pirates Winner</h4>
+                            <p class="award-description">Won Shape the Future Challenge.</p>
+                        </div>
+                        <div>
+                            <h4 class="award-name">Rise Fellowship</h4>
+                            <p class="award-description">One of 100 students among 15k+ applications.</p>
+                        </div>
+                        <div>
+                            <h4 class="award-name">Kode With Klossy x Estee Lauder Web Design Challenge Finalist</h4>
+                            <p class="award-description">One of 5 submissions to live demo to Estée Lauder team.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="note-item project-note" data-page="project-3" style="display: none;">
-                    <div class="note-title">Beeline TagTeam Reader</div>
-                    <div class="note-preview">Community Partnership</div>
+
+                <!-- Features -->
+                <div class="award-card" style="transform: rotate(1.5deg);">
+                    <h3 class="award-section-title">Features</h3>
+                    <div class="award-list">
+                        <div>
+                            <h4 class="award-name">UN STEM4ALL Podcast</h4>
+                            <p class="award-description">Topics: Supporting girls in STEM, Gen Z and emerging technologies.</p>
+                        </div>
+                        <div>
+                            <h4 class="award-name">This Week in Voice</h4>
+                            <p class="award-description">Topics: AI and labor, conversational AI, GEN Z and voice AI adoption.</p>
+                        </div>
+                        <div>
+                            <h4 class="award-name">Another Climate Tech Podcast</h4>
+                            <p class="award-description">Topics: Youth engagement, Aeifloria, climate.</p>
+                        </div>
+                        <div>
+                            <h4 class="award-name">TEKNOSA</h4>
+                            <p class="award-description">Presented the project that got me Rise to TEKNOSA partners, Turkey's largest tech commerce firm.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="note-item project-note" data-page="project-4" style="display: none;">
-                    <div class="note-title">Cape Colony Land Grants Map</div>
-                    <div class="note-preview">Research</div>
+            </div>
+        </section>
+
+      <!-- GEOGUESSER -->
+      <section class="mb-20">
+        <h2 class="section-header" style="transform: rotate(-0.8deg);">
+            <span class="highlight-green">GeoGuessr</span>
+        </h2>
+        <p class="geoguessr-description">I love GeoGuessr (not that I'm good at it). Here are some photos from my travels—guess the location and I'll tell you the story behind!</p>
+        
+        <div id="geoguessr-container" class="geoguessr-container">
+            <!-- Start Screen -->
+            <div id="start-screen" class="geoguessr-screen">
+                <button id="start-btn" class="geoguessr-start-btn">Start</button>
+            </div>
+
+            <!-- Game Screen -->
+            <div id="game-screen" class="geoguessr-screen" style="display: none;">
+                <div class="geoguessr-photo-container">
+                    <div class="polaroid-card geoguessr-polaroid">
+                        <div class="tape-accent" style="left: 50%; transform: translateX(-50%) rotate(-5deg);"></div>
+                        <div class="geoguessr-image-wrapper">
+                            <img id="geoguessr-photo" src="" alt="Guess the location" class="geoguessr-photo">
+                            <div id="timer-display" class="geoguessr-timer">5</div>
+                            
+                            <!-- Reveal Overlay -->
+                            <div id="reveal-overlay" class="geoguessr-overlay" style="display: none;">
+                                <div class="geoguessr-overlay-content">
+                                    <h3 id="location-reveal" class="geoguessr-location"></h3>
+                                    <p id="fact-reveal" class="geoguessr-fact"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="note-item project-note" data-page="project-5" style="display: none;">
-                    <div class="note-title">When Merit Meets Reality</div>
-                    <div class="note-preview">Challenge</div>
+
+                <!-- Next Button (outside photo) -->
+                <div id="next-btn-container" style="display: none; margin-top: 1.5rem;">
+                    <button id="next-btn" class="geoguessr-next-btn">Next Photo</button>
                 </div>
-                <div class="note-item" data-page="featured">
-                    <div class="note-title">Featured On</div>
-                    <div class="note-preview"></div>
-                </div>
-                <div class="note-item" data-page="media">
-                    <div class="note-title">Books & Media</div>
-                    <div class="note-preview"></div>
-                </div>
-                <div class="note-item" data-page="impossible">
-                    <div class="note-title">Impossible List</div>
-                    <div class="note-preview"></div>
+            </div>
+
+            <!-- End Screen -->
+            <div id="end-screen" class="geoguessr-screen" style="display: none;">
+                <div class="geoguessr-end-card">
+                    <h3 class="geoguessr-end-title">That's all!</h3>
+                    <p class="geoguessr-end-message">Thank you for getting to know me :)</p>
+                    <button id="restart-btn" class="geoguessr-restart-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                            <path d="M21 3v5h-5"></path>
+                            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                            <path d="M3 21v-5h5"></path>
+                        </svg>
+                        Restart
+                    </button>
                 </div>
             </div>
         </div>
+    </section>
+                    
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="content-header">
-                <div class="content-title" id="content-title">Bio</div>
-            </div>
-            <div class="content-body">
-                <!-- Bio Page -->
-                <div class="page active bio-page" id="bio">
-                    <div class="headshot"></div>
-                    <div class="name">Elanu Karakus</div>
-                    <div class="title">CS @ Stanford'28 | Rise Fellow'23 | Technology + Impact</div>
-                    <div class="bio">
-                        <p>Hi, I’m Elanu, a second-year CS student at Stanford with a minor in Management Science & Engineering. I’m originally from Turkey, and outside of class, you’ll often find me reading, tinkering with side projects, or cafe-hopping with friends.
-                            <br>
-                            <br>
+        <!-- Footer -->
+        <footer class="footer-text">
+            <p>built despite procrastination</p>
+        </footer>
 
-                        I’m passionate about building things that matter. I aim to blend technical skills with user-centered design to create tools and experiences that people genuinely love to use. I'm especially excited about using technology to drive meaningful impact and solve real-world problems.
-                            <br>
-                            <br>
-
-                        Feel free to reach out: elanu@stanford.edu
-                        </p>
-                    </div>
-
-                    <div class="skills-section">
-                        <div class="skills-title">Skills</div>
-                        <div class="skills-grid">
-                            <div class="skill-category">
-                                <h4>Tech Stack</h4>
-                                <p> <span style='font-weight:bold;'>Python:</span> Webdev (FastAPI, Flask), AI&ML (scikit-learn, Keras, Tensorflow, NLTK, PyTorch)
-                                <br> <span style='font-weight:bold;'>Javascript:</span> Webdev (React, Node.js, Express.js, Svelte), Mobile (React Native))
-                                <br> <span style='font-weight:bold;'>C/C++:</span> Abstractions, Data Structures and Algorithms
-                                <br> Databases: SQL (MySQL, SQLite), NoSQL (MongoDB, Firebase)
-                                </p>
-                            </div>
-                            <div class="skill-category">
-                                <h4>Product</h4>
-                                <p>Product Strategy, UI/UX, Figma, User Research, Cross-functional Collaboration, Problem Solving, Design Thinking, Project Management, Grant Writing</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projects Page -->
-                <div class="page" id="projects">
-                    <div class="projects-grid">
-                        <div class="project-card" onclick="showProject('project-1')">
-                            <div class="project-title">Digital Green</div>
-                            <div class="project-description">Internship at a tech non-profit building out features for an app with +5M users</div>
-                            <div class="project-tech">HTML, CSS, FastAPI</div>
-                            <div class="project-tech">Product</div>
-                            <div class="project-tech">Cross collaboration</div>
-                            <div class="project-tech">LLMs and Model Context Protocol</div>
-                        </div>
-                        <div class="project-card" onclick="showProject('project-2')">
-                            <div class="project-title">Marketecture - AI-Content Generator</div>
-                            <div class="project-description">Internship at a marketing firm testing social media content generation with AI</div>
-                            <div class="project-tech">Product Strategy</div>
-                            <div class="project-tech">UI/UX</div>
-                            <div class="project-tech">Stakeholder Interviews</div>
-                            <div class="project-tech">Python (Streamlit)</div>
-                            <div class="project-tech">LLMs and RAG</div>
-                        </div>
-                        <div class="project-card" onclick="showProject('project-3')">
-                            <div class="project-title">Beeline TagTeam Reader</div>
-                            <div class="project-description">Edtech gamified platform for elementary schoolers to practice reading collaboratively</div>
-                            <div class="project-tech">React, Node.js, Express.js</div>
-                            <div class="project-tech">MongoDB</div>
-                            <div class="project-tech">User Interviews</div>
-                            <div class="project-tech">UI/UX (Figma)</div>
-                        </div>
-                        <div class="project-card" onclick="showProject('project-4')">
-                            <div class="project-title">Cape Colony Land Grants Map</div>
-                            <div class="project-description">Georeferencing a paper South African farm map to create a searchable and interactive map</div>
-                            <div class="project-tech">GIS</div>
-                            <div class="project-tech">Data Collection and Visualization</div>
-                            <div class="project-tech">React</div>
-                        </div>
-                        <div class="project-card" onclick="showProject('project-5')">
-                            <div class="project-title">When Merit Meets Reality</div>
-                            <div class="project-description">A website to use data to create a storytelling experience raising attention to wage gap created for Kode With Klossy x Black Wealth Data Center Challenge</div>
-                            <div class="project-tech">Svelte & p5.js</div>
-                            <div class="project-tech">Design</div>
-                            <div class="project-tech">Storytelling</div>
-                            <div class="project-tech">Data Visualization</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Individual Project Pages -->
-                <div class="page" id="project-1">
-                    <h2>Digital Green</h2>
-                    <p><strong>Role:</strong> Software & Product Intern</p>
-                    <br>
-                    <h3>Overview</h3>
-                    <p><a href="https://digitalgreen.org/">Digital Green</a> is a tech nonprofit building user friendly AI with grassroots experience. Currently as an intern, I work on a range of projects, most pertaining to building features to be tested by the product team and implementing their feedback.</p>
-                    <br>
-                    <h3>Key Projects</h3>
-                    <p>• Creating a UI for testing starter questions for user onboarding to chatbot <br>• Build a notification system based on users' chat history and create a UI for testing<br>• Developing model context protocols</p>
-                    <br>
-                    <h3>Results</h3>
-                    <p>• Features pushed to +5M users<br>
-                </div>
-
-                <div class="page" id="project-2">
-                    <h2>Marketecture</h2>
-                    <p><strong>Role:</strong> AI & Marketing Intern</p>
-                    <br>
-                  
-                    <h3>Overview</h3>
-                    <p>
-                      As an AI & Marketing Intern at a social media marketing firm, I led the development of an internal AI-powered platform to automate content generation for clients.
-                      The tool was designed to deeply understand a brand’s voice and positioning through onboarding inputs and documents, and generate highly personalized content and strategy recommendations.
-                    </p>
-                    <br>
-                  
-                    <h3>Problem</h3>
-                    <p>
-                      The firm’s clients needed consistent, high-quality marketing content that aligned with their brand voice—but internal consultants were spending significant time writing briefs and generating ideas manually.
-                      We saw an opportunity to streamline this with a custom AI tool that understood each brand's unique identity and tone.
-                    </p>
-                    <br>
-                  
-                    <h3>User Research Insights</h3>
-                    <p>
-                      Through conversations with the firm, I identified key pain points:
-                      <ul>
-                        <li>Generic AI tools like ChatGPT lacked context and produced off-brand outputs</li>
-                        <li>ChatGPT pro was adept at generating content but it meant the firm staff had to create GPT's for each brand and their clients weren't always tech savy enough to figure out how to best make use of their personal GPT.</li>
-                        <li>Firm staff wasted time rewriting or re-explaining brand tone</li>
-                        <li>Clients often needed inspiration and competitor context alongside text suggestions</li>
-                      </ul>
-                    </p>
-                    <br>
-                  
-                    <h3>Product Approach</h3>
-                    <p>
-                      I built the tool using Retrieval-Augmented Generation (RAG), integrating OpenAI's API with a custom knowledge base sourced from past client work, internal brand strategy docs, and onboarding transcripts. 
-                      I also designed a brand onboarding flow that generated a persistent "brand profile"—a rich context layer used to ground all content generation consisting of an inspiration bank and customer avatar.
-                    </p>
-                    <br>
-                  
-                    <h3>Key Features</h3>
-                    <ul>
-                      <li>AI chatbot with retrieval-augmented content generation grounded in firm-specific strategy docs</li>
-                      <li>Brand onboarding flow that creates a profile with customer avatar, tone guidelines, and example voice</li>
-                      <li>Competitor analyzer that surfaces stylistic differences between brands using scraped content</li>
-                      <li>Inspiration bank and copy templates tailored to each brand’s vibe and goals</li>
-                    </ul>
-                    <br>
-                  
-                    <h3>Demo</h3>
-                    <p>[Insert demo video]</p>
-                    <br>
-                  
-                    <h3>Links</h3>
-                    <ul>
-                      <li><a href="https://www.figma.com/board/fTl4skdq8e2fnJoRDXG2Sw/Marketecture?node-id=0-1&t=jgm0Xs1OkqwnQzDv-1">FigJam Brainstorming</a></li>
-                    </ul>
-                    <br>
-                  
-                    <h3>What I’d Do Next</h3>
-                    <p>
-                      I’d develop a feedback loop for human-in-the-loop editing so the model can learn from brand strategist corrections over time. I’d also explore integrations with publishing tools like Webflow or HubSpot for seamless content deployment.
-                    </p>
-                    <br>
-                  
-                    <h3>What This Project Says About Me</h3>
-                    <p>
-                      I love building tools that combine deep brand thinking with AI’s creative power. This project reflects how I approach technical problem-solving with a product mindset, always focused on real user needs and future scalability.
-                    </p>
-                  </div>
-                  
-
-                <div class="page" id="project-3">
-                    <h2>Beeline TagTeam Reader</h2>
-                    <p><strong>Coursework:</strong> CS51/52 (Project-based social impact x software engineering class)</p>
-                    <br>
-                  
-                    <h3>Overview</h3>
-                    <p>
-                      Built in collaboration with peers for Beeline, an edtech startup. We designed and prototyped an AI-powered reading platform for early learners.
-                      I contributed to product direction, UX design decisions, and full-stack development using MERN and Anthropic's Claude API.
-                    </p>
-                    <br>
-                  
-                    <h3>Problem</h3>
-                    <p>
-                      Many students—especially in under-resourced schools—lack access to leveled, engaging reading material. Teachers struggle to find content that matches
-                      both students’ interests and reading levels. Beeline wanted to explore a collaborative and AI-enhanced solution to support early literacy.
-                    </p>
-                    <br>
-                  
-                    <h3>User Research Insights</h3>
-                    <p>
-                      We interviewed teachers and reviewed EdTech tools in use today. Key findings:
-                      <ul>
-                        <li>    Students stay more engaged when reading material is tailored to their interests</li>
-                        <li>    Teachers need quick ways to monitor comprehension without heavy grading load</li>
-                        <li>    Collaborative or gamified formats increase participation</li>
-                      </ul>
-                    </p>
-                    <br>
-                  
-                    <h3>Product Approach</h3>
-                    <p>
-                      We focused on building a lightweight, modular prototype to test the core hypothesis: Can AI-generated readings + collaborative sessions improve student engagement and comprehension?
-                    </p>
-                    <br>
-                  
-                    <h3>Key Features</h3>
-                    <ul>
-                      <li>AI-generated short readings based on chosen topics and reading level</li>
-                      <li>Quiz generation tied directly to the reading content</li>
-                      <li>Kahoot-style collaborative sessions for peer learning</li>
-                      <li>Automatic results sharing with teachers to support formative assessment</li>
-                    </ul>
-                    <br>
-                  
-                    <h3>Demo</h3>
-                    <p>[Embed or link]</p>
-                    <br>
-                  
-                    <h3>Links</h3>
-                    <ul>
-
-                      <li><a href="https://www.figma.com/design/WiTMDfH6XOUXHPsi5m7ATE/BeeLine-Medium-Fi---High-Fi?node-id=111-2&t=qxZz6Npjn2YYM0xN-1">Figma Prototype</a></li>
-                    </ul>
-                    <br>
-                  
-                    <h3>What I’d Do Next</h3>
-                    <p>
-                      I’d run small pilot sessions with students and educators to observe engagement firsthand, then iterate on UX and add voice input for accessibility. I’d also explore using Retrieval-Augmented Generation (RAG) for deeper comprehension questions.
-                    </p>
-                    <br>
-                  
-                    <h3>What This Project Says About Me</h3>
-                    <p>
-                      This project reflects my interest in building AI tools that solve real-world problems, especially in learning and equity. I love working at the intersection of tech, design, and human needs.
-                    </p>
-                  </div>
-                  
-                  <div class="page" id="project-4">
-                    <h2>Cape Colony Land Grants Map</h2>
-                    <p><strong>Role:</strong> Research Assistant (Digital History Project)</p>
-                    <br>
-                  
-                    <h3>Overview</h3>
-                    <p>
-                      I supported the digital restoration of “The Southwestern Cape Colony, 1657–1750: Freehold Land Grants,” a historical text documenting early Dutch settlements in South Africa.
-                      The goal was to make the information spatially explorable and accessible to researchers, educators, and the public.
-                    </p>
-                    <br>
-                  
-                    <h3>Problem</h3>
-                    <p>
-                      The original document existed only as a scanned printout, making it difficult to analyze spatial patterns or connect land grants with historical timelines.
-                      Our challenge was to transform it into a georeferenced, interactive dataset and map-based interface.
-                    </p>
-                    <br>
-                  
-                    <h3>Process</h3>
-                    <ul>
-                      <li>Uploaded and aligned scanned maps using QGIS</li>
-                      <li>Georeferenced and digitized each individual land grant with coordinates and metadata</li>
-                      <li>Exported the dataset into a usable format for frontend development</li>
-                      <li>Built a web interface allowing users to search by farm name, owner, and year</li>
-                    </ul>
-                    <br>
-                  
-                    <h3>Demo</h3>
-                    <p><a href="https://colonial-map.vercel.app/" target="_blank">Live Demo</a></p>
-                    <br>
-                  
-                    <h3>What This Project Says About Me</h3>
-                    <p>
-                      I enjoy bringing history to life through digital tools. This project reflects my interest in combining archival work, spatial data, and web interfaces to tell stories that are otherwise hard to access.
-                    </p>
-                  </div>
-
-                  <div class="page" id="project-5">
-                    <h2>When Merit Meets Reality</h2>
-                    <p><strong>Challenge:</strong> Kode With Klossy × Black Wealth Data Center</p>
-                    <br>
-                  
-                    <h3>Overview</h3>
-                    <p>
-                      A data storytelling web experience designed to raise awareness around the racial wage gap in the U.S. workforce, especially the disparities Black women face even when they meet or exceed academic and professional "merit" benchmarks.
-                    </p>
-                    <br>
-                  
-                    <h3>Problem</h3>
-                    <p>
-                      BWDC provides rich datasets about racial income disparities, but raw numbers often fail to emotionally engage or educate general audiences.
-                      My goal was to turn the data into a story that is both accessible and powerful.
-                    </p>
-                    <br>
-                  
-                    <h3>Process</h3>
-                    <ul>
-                      <li>Explored BWDC datasets to identify key narrative moments—wage comparisons, education levels, and generational wealth gaps</li>
-                      <li>Designed a linear scrollytelling experience using p5.js animations to illustrate data over time and context</li>
-                      <li>Wrote narrative copy to guide users through the story with empathy and clarity</li>
-                    </ul>
-                    <br>
-                  
-                    <h3>Demo</h3>
-                    <p><a href="https://elnukk.github.io/merit-meets-reality/" target="_blank">Live Demo</a></p>
-                    <br>
-                  
-                    <h3>What This Project Says About Me</h3>
-                    <p>
-                      I care about making data human. This project reflects my commitment to designing with purpose and using technical skills to spotlight structural inequities in a digestible, compelling way.
-                    </p>
-                  </div>
-                  
-                  
-
-                <!-- Featured On Page -->
-                <div class="page" id="featured">
-                    <div class="featured-list">
-                        <h2>Podcasts</h2>
-                        <ul class="media-list">
-                            <li class="media-item">Another Climate Tech Podcast <a href="https://open.spotify.com/episode/0go0mCnF8fj7AjSSZWsSc1?si=b7b31006d9254e2c&nd=1&dlsi=e46234ee2a324ade">[Spotify]</a></li>
-                            <li class="media-item">UNDP STEM4ALL STEMinists <a href="https://open.spotify.com/show/3OUkWHgIWCwafNGvfYrhRg">[Spotify]</a></li>
-                            <li class="media-item">This Week In Voice <a href="https://www.youtube.com/watch?v=cEBXTCODDRA">[Youtube]</a></li>
-                        </ul>
-
-                        <br><br>
-                        <h2>Hackathons/Competitions</h2>
-                        <ul class="media-list">
-                            <li class="media-item">TreeHacks Sustainability Track Prize</li>
-                            <li class="media-item">Emergent Ventures Grant Winner</li>
-                            <li class="media-item">The Earth Prize Scholar - North America Finalist</li>
-                            <li class="media-item">Moonshot Pirates Shape the Future Winner</li>
-                            <li class="media-item">
-                            Kode With Klossy x Estee Lauder Web Design Challenge Finalist</li>
-                            <li class="media-item">
-                            TEDAi San Francisco Hackathon Finalist</li>
-                        </ul>
-
-                    </div>
-                </div>
-                <!-- Books & Media Page -->
-                <div class="page" id="media">
-                    <h2>Recently read</h2>
-                    <ul class="media-list">
-                        <li class="media-item">Currently: Surrounded by Idiots by Thomas Erikson</li>
-                        <li class="media-item">Nudge by Richard H. Thalor</li>
-                        <li class="media-item">Intermezzo by Sally Rooney</li>
-                        <li class="media-item">Homosapiens by Yuval Noah Harari (Re-read)</li>
-                        <li class="media-item">The Lighthouse by Virginia Woolf</li>
-                        <li class="media-item">White Nights by Fyodor Dostoyevsky</li>
-                    </ul>
-
-                </div>
-
-                <!-- Impossible List Page -->
-                <!-- add completed to class to check it off -->
-                <div class="page" id="impossible">
-                    <h2>Goals & Achievements</h2>
-                    <br>
-                    <ul class="impossible-list">
-                        <h3>Professional</h3>
-                        <li class="impossible-item">
-                            <div class="checkbox"></div>
-                            Build a product used by 10k+ people
-                        </li>
-                        <li class="impossible-item">
-                            <div class="checkbox"></div>
-                            Get my first job in a big city after college
-                        </li>
-                        <br>
-                        <h3>Travel</h3>
-                        <li class="impossible-item">
-                            <div class="checkbox"></div>
-                            Go on a solo backpacking trip
-                        </li>
-                        <li class="impossible-item">
-                            <div class="checkbox"></div>
-                            Travel to 30 countries
-                        </li>
-                        <li class="impossible-item">
-                            <div class="checkbox"></div>
-                            Go to Coachella
-                        </li>
-                        <li class="impossible-item">
-                            <div class="checkbox"></div>
-                            Go to Sziget
-                        </li>
-                        <li class="impossible-item">
-                            <div class="checkbox"></div>
-                            Attend a Formula 1 race
-                        </li>
-                        <br>
-                        <h3>Skills</h3>
-                        <li class="impossible-item">
-                            <div class="checkbox"></div>
-                            Learn a 4th language
-                        </li>
-                        <li class="impossible-item">
-                            <div class="checkbox"></div>
-                            Learn golf 
-                        </li>
-                        <li class="impossible-item">
-                            <div class="checkbox"></div>
-                            Do 10 proper pushups
-                        </li>
-                        
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
-
-    <script>
-        // Navigation functionality
-        const noteItems = document.querySelectorAll('.note-item');
-        const pages = document.querySelectorAll('.page');
-        const contentTitle = document.getElementById('content-title');
-        const projectNotes = document.querySelectorAll('.project-note');
-
-        // Handle navigation
-        noteItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const pageId = item.dataset.page;
-
-                if (pageId === 'projects') {
-                    // Toggle project notes visibility
-                    const areVisible = projectNotes[0].style.display !== 'none';
-                    projectNotes.forEach(note => {
-                        note.style.display = areVisible ? 'none' : 'block';
-                    });
-                    if (!areVisible) {
-                        showPage('projects');
-                        setActiveNote(item);
-                    }
-                } else if (pageId) {
-                    showPage(pageId);
-                    setActiveNote(item);
-                }
-            });
-        });
-
-        function showPage(pageId) {
-            // Hide all pages
-            pages.forEach(page => page.classList.remove('active'));
-
-            // Show selected page
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-
-                // Update header title
-                const pageTitle = getPageTitle(pageId);
-                contentTitle.textContent = pageTitle;
-            }
-        }
-
-        function showProject(projectId) {
-            showPage(projectId);
-
-            // Set the project note as active
-            const projectNote = document.querySelector(`[data-page="${projectId}"]`);
-            if (projectNote) {
-                setActiveNote(projectNote);
-            }
-        }
-
-        function setActiveNote(activeItem) {
-            // Remove active class from all notes
-            noteItems.forEach(note => note.classList.remove('active'));
-
-            // Add active class to clicked note
-            activeItem.classList.add('active');
-        }
-
-        function getPageTitle(pageId) {
-            const titles = {
-                'bio': 'Bio',
-                'projects': 'Projects',
-                'project-1': 'Digital Green',
-                'project-2': 'Marketecture - AI-Content Generator',
-                'project-3': 'Beeline TagTeam Reader',
-                'project-4': 'Cape Colony Land Grants Map',
-                'project-5': 'When Merit Meets Reality',
-                'featured': 'Featured On',
-                'media': 'Books & Media',
-                'impossible': 'Impossible List'
-            };
-            return titles[pageId] || 'Notes';
-        }
-
-        // Impossible list checkbox functionality
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('checkbox')) {
-                const checkbox = e.target;
-                const listItem = checkbox.closest('.impossible-item');
-
-                checkbox.classList.toggle('checked');
-                listItem.classList.toggle('completed');
-            }
-        });
-
-        // Make media list items editable
-        document.addEventListener('keydown', (e) => {
-            if (e.target.classList.contains('media-item') && e.key === 'Enter') {
-                e.preventDefault();
-
-                // Create new item
-                const newItem = document.createElement('li');
-                newItem.className = 'media-item';
-                newItem.contentEditable = 'true';
-                newItem.textContent = 'New item...';
-
-                // Insert after current item
-                e.target.parentNode.insertBefore(newItem, e.target.nextSibling);
-
-                // Focus and select text
-                newItem.focus();
-                const range = document.createRange();
-                range.selectNodeContents(newItem);
-                const selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
-            }
-        });
-
-        // Initialize - show bio page by default
-        showPage('bio');
-    </script>
 </body>
-
 </html>
