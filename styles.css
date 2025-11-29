@@ -579,10 +579,9 @@
     }
 }
 
-
 /* Modal Styles */
 .modal-overlay {
-    display: none;
+    display: none !important;
     position: fixed;
     top: 0;
     left: 0;
@@ -661,25 +660,17 @@
 
 .modal-link {
     display: inline-block;
-    font-family: 'Indie Flower', cursive;
-    font-size: 1.2rem;
-    color: #2d3748;
-    background: #48bb78;
-    padding: 0.75rem 2rem;
-    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: white;
+    background: #2d3748;
+    padding: 0.65rem 1.5rem;
+    border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.2s;
-    transform: rotate(-1deg);
-    border: 2px solid #2d3748;
-    box-shadow: 4px 4px 0 #2d3748;
-    margin: 0 auto;
-    display: block;
-    width: fit-content;
+    transition: background 0.2s;
 }
 
 .modal-link:hover {
-    transform: rotate(-1deg) translateY(-2px);
-    box-shadow: 6px 6px 0 #2d3748;
-    background: #4ade80;
+    background: #1a202c;
 }
