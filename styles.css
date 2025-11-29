@@ -406,25 +406,33 @@
     text-align: center;
 }
 
+
 .geoguessr-start-btn {
-    background: linear-gradient(135deg, #A3D78A 0%, #8bc774 100%);
-    color: #1f2937;
-    font-size: 1.5rem;
-    font-weight: 700;
-    padding: 1rem 3rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transform: rotate(-1deg);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(163, 215, 138, 0.3);
+    display: inline-block;
     font-family: 'Indie Flower', cursive;
+    font-size: 1.2rem;
+    color: #2d3748;
+    background: #48bb78;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+    transform: rotate(-1deg);
+    border: 2px solid #2d3748;
+    box-shadow: 4px 4px 0 #2d3748;
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
 }
 
 .geoguessr-start-btn:hover {
-    transform: rotate(0deg) scale(1.05);
-    box-shadow: 0 6px 20px rgba(163, 215, 138, 0.4);
+    transform: rotate(-1deg) translateY(-2px);
+    box-shadow: 6px 6px 0 #2d3748;
+    background: #4ade80;
 }
+
+
 
 .geoguessr-photo-container {
     margin-bottom: 2rem;
@@ -507,22 +515,30 @@
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+
 .geoguessr-next-btn {
-    background: linear-gradient(135deg, #FF5555 0%, #ff4444 100%);
+    display: inline-block;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.2rem;
     color: white;
-    font-size: 1rem;
-    font-weight: 600;
+    background: linear-gradient(135deg, #FF5555 0%, #ff4444 100%);
     padding: 0.75rem 2rem;
-    border: none;
     border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(255, 85, 85, 0.3);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+    transform: rotate(-1deg);
+    border: 2px solid #f38686;
+    box-shadow: 4px 4px 0 #f38686;
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
 }
 
 .geoguessr-next-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(255, 85, 85, 0.4);
+    transform: rotate(-1deg) translateY(-2px);
+    box-shadow: 6px 6px 0 #2d3748;
+    
 }
 
 .geoguessr-end-card {
@@ -561,4 +577,109 @@
     .geoguessr-fact {
         font-size: 0.9rem;
     }
+}
+
+
+/* Modal Styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.modal-overlay.active {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    padding: 2.5rem;
+    margin: 2rem auto;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    cursor: pointer;
+    color: #999;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+}
+
+.modal-tech {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.modal-bullets {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #333;
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin-bottom: 1.75rem;
+}
+
+.modal-bullets li {
+    margin-bottom: 0.5rem;
+}
+
+.modal-link {
+    display: inline-block;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.2rem;
+    color: #2d3748;
+    background: #48bb78;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+    transform: rotate(-1deg);
+    border: 2px solid #2d3748;
+    box-shadow: 4px 4px 0 #2d3748;
+    margin: 0 auto;
+    display: block;
+    width: fit-content;
+}
+
+.modal-link:hover {
+    transform: rotate(-1deg) translateY(-2px);
+    box-shadow: 6px 6px 0 #2d3748;
+    background: #4ade80;
 }

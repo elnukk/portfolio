@@ -115,3 +115,47 @@ function restartGame() {
     startScreen.style.display = 'block';
     currentPhotoIndex = 0;
 }
+
+
+function openModal(title, tech, bullets, link) {
+    const modal = document.getElementById('project-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalTech = document.getElementById('modal-tech');
+    const modalBullets = document.getElementById('modal-bullets');
+    const modalLink = document.getElementById('modal-link');
+
+    modalTitle.textContent = title;
+    modalTech.textContent = tech;
+    
+    modalBullets.innerHTML = '';
+    bullets.forEach(bullet => {
+        const li = document.createElement('li');
+        li.textContent = bullet;
+        modalBullets.appendChild(li);
+    });
+
+    modalLink.href = link;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    const modal = document.getElementById('project-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+document.getElementById('project-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});

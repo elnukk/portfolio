@@ -11,6 +11,17 @@
 </head>
 <body>
     <div class="texture-overlay"></div>
+        <!-- Modal -->
+        <div id="project-modal" class="modal-overlay">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <h3 id="modal-title" class="modal-title"></h3>
+                <p id="modal-tech" class="modal-tech"></p>
+                <ul id="modal-bullets" class="modal-bullets"></ul>
+                <a id="modal-link" class="modal-link" href="#" target="_blank">View Project →</a>
+            </div>
+        </div>
+
 
     <!-- Contained width -->
     <div class="max-w-4xl mx-auto relative z-10 pt-12">
@@ -26,7 +37,7 @@
 
             <div class="mb-6">
                 <h1 class="intro-title">
-                    <span>Hey! I'm </span>
+                    <span>Hi! I'm </span>
                     <span class="handwritten-name">Elanu.</span>
                 </h1>
             </div>
@@ -73,7 +84,12 @@
             
             <div class="projects-grid">
                 <!-- Project 1 -->
-                <a href="https://huggingface.co/spaces/elanuk/mcp-hf" target="_blank" class="polaroid-card" style="transform: rotate(-2deg);">
+                <div class="polaroid-card" style="transform: rotate(-2deg); cursor: pointer;" 
+                     onclick="openModal('MCP for Digital Green', 'FastAPI • Docker • HuggingFace', [
+                         'Built Model Context Protocol server for accessing farm advisory',
+                         'Deployed on HuggingFace Spaces with Docker for scalable access',
+                         'Integrated with Claude Desktop for seamless usage'
+                     ], 'https://huggingface.co/spaces/elanuk/mcp-hf')">
                     <div class="tape-accent" style="left: 50%; transform: translateX(-50%) rotate(-5deg);"></div>
                     <div class="polaroid-image">
                         <img src="src/mcp1.png" alt="MCP for Digital Green" class="polaroid-photo">  
@@ -82,10 +98,15 @@
                         <h3 class="polaroid-title">MCP for Digital Green</h3>
                         <p class="polaroid-tech">FastAPI • Docker • HuggingFace</p>
                     </div>
-                </a>
+                </div>
 
                 <!-- Project 2 -->
-                <a href="https://valiant-peace-959.notion.site/Aeifloria-Smart-Flower-for-Bee-Pollination-Increase-187ee57654ec80b382a4e85ed80b6898" target="_blank" class="polaroid-card" style="transform: rotate(3deg);">
+                <div class="polaroid-card" style="transform: rotate(3deg); cursor: pointer;"
+                     onclick="openModal('Aeifloria', 'Product Design • Climate • Grants', [
+                         'Designed smart flower prototype to increase bee pollination rates',
+                         'Secured $5K+ in grants from Earth Prize and Moonshot Pirates',
+                         'Featured on Another Climate Tech Podcast for youth climate innovation'
+                     ], 'https://valiant-peace-959.notion.site/Aeifloria-Smart-Flower-for-Bee-Pollination-Increase-187ee57654ec80b382a4e85ed80b6898')">
                     <div class="tape-accent" style="right: 1rem; transform: rotate(10deg);"></div>
                     <div class="polaroid-image">
                         <img src="src/aei.png" alt="Aeifloria" class="polaroid-photo">
@@ -94,19 +115,23 @@
                         <h3 class="polaroid-title">Aeifloria</h3>
                         <p class="polaroid-tech">Product Design • Climate • Grants</p>
                     </div>
-                </a>
+                </div>
 
                 <!-- Project 3 -->
-                <a href="https://tksworld.notion.site/Leveraging-LLMs-to-Minimize-the-Time-Needed-for-Carbon-Credit-Project-Verification-by-Elanu-Karakus--6b48432b0ed848fcad6175095ebe65ec" target="_blank" class="polaroid-card" style="transform: rotate(-1.5deg);">
+                <div class="polaroid-card" style="transform: rotate(-1.5deg); cursor: pointer;"
+                     onclick="openModal('VerifyX', 'LLM • Carbon • Shell', [
+                         'Developed LLM system to automate carbon credit project verification',
+                         'Prototyped solution for Shell to reduce verification time by 40%+'
+                     ], 'https://tksworld.notion.site/Leveraging-LLMs-to-Minimize-the-Time-Needed-for-Carbon-Credit-Project-Verification-by-Elanu-Karakus--6b48432b0ed848fcad6175095ebe65ec')">
                     <div class="tape-accent" style="left: 1rem; transform: rotate(-8deg);"></div>
                     <div class="polaroid-image">
                         <img src="src/nbs.png" alt="VerifyX" class="polaroid-photo">
                     </div>
                     <div class="polaroid-caption">
                         <h3 class="polaroid-title">VerifyX</h3>
-                        <p class="polaroid-tech">LLM • Carbon • Shell</p>
+                        <p class="polaroid-tech">Consulting • LLMs • Prototyping</p>
                     </div>
-                </a>
+                </div>
             </div>
         </section>
 
@@ -169,7 +194,12 @@
             </h2>
             
             <div class="projects-grid-2x2">
-                <a href="https://docs2notion.com/" target="_blank" class="polaroid-card" style="transform: rotate(1deg);">
+                <div class="polaroid-card" style="transform: rotate(1deg); cursor: pointer;"
+                     onclick="openModal('Docs2Notion', 'Node.js • Vercel', [
+                         'Built converter to seamlessly migrate Google Docs to Notion pages',
+                         'Deployed serverless on Vercel',
+                         'Monthly 400+ visitors since launch on June, 2025'
+                     ], 'https://docs2notion.com/')">>
                     <div class="tape-accent" style="left: 50%; transform: translateX(-50%) rotate(6deg);"></div>
                     <div class="polaroid-image">
                         <img src="src/docs2notion.png" alt="Docs2Notion" class="polaroid-photo">
@@ -178,9 +208,14 @@
                         <h3 class="polaroid-title">Docs2Notion</h3>
                         <p class="polaroid-tech">Node.js • Vercel</p>
                     </div>
-                </a>
+                </div>
 
-                <a href="https://colonial-map.vercel.app/" target="_blank" class="polaroid-card" style="transform: rotate(-1.5deg);">
+                <div class="polaroid-card" style="transform: rotate(-1.5deg); cursor: pointer;"
+                     onclick="openModal('CESTA Digital Restoration', 'QGIS • React', [
+                         'Created a digital restoration of a map of colonial farms in South Africa',
+                         'Used QGIS for georeferencing',
+                         'Built interactive web interface for exploring the map'
+                     ], 'https://colonial-map.vercel.app/')">
                     <div class="tape-accent" style="right: 1.5rem; transform: rotate(-7deg);"></div>
                     <div class="polaroid-image">
                         <img src="src/cesta.png" alt="CESTA Digital Restoration" class="polaroid-photo">
@@ -189,9 +224,14 @@
                         <h3 class="polaroid-title">CESTA Digital Restoration</h3>
                         <p class="polaroid-tech">QGIS • React</p>
                     </div>
-                </a>
+                </div>
 
-                <a href="#" target="_blank" class="polaroid-card" style="transform: rotate(0.5deg);">
+                <div class="polaroid-card" style="transform: rotate(0.5deg); cursor: pointer;"
+                     onclick="openModal('Beeline Reader x CS51', 'MongoDB • Express • React • Node', [
+                         'Developed a full-stack platform for K-12 students to practice reading comprehension collaboratively',
+                         'Integrated Beeline Reader for improved accessibility',
+                         'Built real-time session synching and routing'
+                     ], '#')">
                     <div class="tape-accent" style="left: 1rem; transform: rotate(8deg);"></div>
                     <div class="polaroid-image">
                         <img src="src/cs51.png" alt="CS51/52 Learning Platform" class="polaroid-photo">
@@ -200,9 +240,13 @@
                         <h3 class="polaroid-title">Beeline Reader x CS51</h3>
                         <p class="polaroid-tech">MongoDB • Express • React • Node</p>
                     </div>
-                </a>
+                </div>
 
-                <a href="https://medium.com/@elanu.karakus/a-magical-fish-captures-co2-in-the-ocean-d92ee3e7d6e8" target="_blank" class="polaroid-card" style="transform: rotate(-0.8deg);">
+                <div class="polaroid-card" style="transform: rotate(-0.8deg); cursor: pointer;"
+                     onclick="openModal('CO2 Capture Robot Sim', 'Python • Algorithms • Robotics', [
+                         'Simulated autonomous underwater robot for ocean CO2 capture',
+                         'Implemented pathfinding algorithms for efficient carbon collection'
+                     ], 'https://medium.com/@elanu.karakus/a-magical-fish-captures-co2-in-the-ocean-d92ee3e7d6e8')">
                     <div class="tape-accent" style="right: 2rem; transform: rotate(-10deg);"></div>
                     <div class="polaroid-image">
                         <img src="src/arctic.png" alt="CO2 Capture Robot Simulation" class="polaroid-photo">
@@ -211,14 +255,15 @@
                         <h3 class="polaroid-title">CO2 Capture Robot Sim</h3>
                         <p class="polaroid-tech">Python • Algorithms • Robotics</p>
                     </div>
-                </a>
+                </div>
             </div>
         </section>
 
-        <!-- AWARDS & SPEAKING -->
+
+        <!-- HONORS & FEATURES -->
         <section class="mb-20">
             <h2 class="section-header" style="transform: rotate(0.8deg);">
-                <span class="highlight-coral">Awards & Speaking</span>
+                <span class="highlight-coral">Honors & Features</span>
             </h2>
             
             <div class="awards-grid">
