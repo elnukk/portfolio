@@ -116,7 +116,6 @@ function restartGame() {
     currentPhotoIndex = 0;
 }
 
-
 function openModal(title, tech, bullets, link) {
     const modal = document.getElementById('project-modal');
     const modalTitle = document.getElementById('modal-title');
@@ -136,12 +135,14 @@ function openModal(title, tech, bullets, link) {
 
     modalLink.href = link;
 
+    modal.style.display = 'flex';
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
     const modal = document.getElementById('project-modal');
+    modal.style.display = 'none';
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
 }
