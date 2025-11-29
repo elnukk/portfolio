@@ -537,7 +537,7 @@
 
 .geoguessr-next-btn:hover {
     transform: rotate(-1deg) translateY(-2px);
-    box-shadow: 6px 6px 0 #2d3748;
+    box-shadow: 6px 6px 0 #ff4444;
     
 }
 
