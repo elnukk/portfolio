@@ -4,11 +4,47 @@
    body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 1) 0%, 
-        rgba(255, 147, 126, 0.3) 100%);
+        #FFF8E7 0%,
+        #FFF0D9 50%,
+        #FFE8CC 100%);
     min-height: 100vh;
     padding: 2rem 1rem;
     color: #1f2937;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(163, 215, 138, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite;
+    z-index: 0;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -30%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 85, 85, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 15s ease-in-out infinite reverse;
+    z-index: 0;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(20px, -20px) rotate(5deg); }
+    50% { transform: translate(-20px, 20px) rotate(-5deg); }
+    75% { transform: translate(20px, 20px) rotate(5deg); }
 }
 
 .handwritten-name {
@@ -22,10 +58,18 @@
 .texture-overlay {
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(163, 215, 138, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 85, 85, 0.03) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 Q 20 5, 30 10 T 50 10' stroke='%23A3D78A' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3Ccircle cx='15' cy='40' r='2' fill='%23FF5555' opacity='0.1'/%3E%3Cpath d='M40 30 L 45 35 L 40 40' stroke='%23A3D78A' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 100;
-    mix-blend-mode: overlay;
+    animation: textureShift 60s linear infinite;
+}
+
+@keyframes textureShift {
+    0% { background-position: 0 0; }
+    100% { background-position: 1000px 1000px; }
 }
 
 /* ====================================
@@ -37,9 +81,18 @@
     height: 140px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid rgba(255, 85, 85, 0.3);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 4px solid #2d3748;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.15),
+        0 0 0 8px rgba(163, 215, 138, 0.3);
     background: #f9fafb;
+    position: relative;
+    animation: headshotPulse 3s ease-in-out infinite;
+}
+
+@keyframes headshotPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 .headshot-img {
@@ -53,9 +106,16 @@
     margin-bottom: 0.5rem;
     font-weight: 700;
     line-height: 1.1;
-    transform: rotate(-1deg);
+    transform: rotate(-2deg);
     display: inline-block;
     color: #111827;
+    position: relative;
+    animation: titleBounce 3s ease-in-out infinite;
+}
+
+@keyframes titleBounce {
+    0%, 100% { transform: rotate(-2deg) translateY(0); }
+    50% { transform: rotate(-1deg) translateY(-5px); }
 }
 
 .intro-text {
@@ -101,11 +161,17 @@
     gap: 0.5rem;
     color: #4b5563;
     transition: all 0.3s ease;
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 2px solid #2d3748;
+    box-shadow: 3px 3px 0 #2d3748;
 }
 
 .social-link:hover {
     color: #A3D78A;
-    transform: scale(1.05) !important;
+    transform: scale(1.05) translateY(-2px) !important;
+    box-shadow: 5px 5px 0 #2d3748;
 }
 
 /* ====================================
@@ -117,7 +183,10 @@
     font-weight: 800;
     display: inline-block;
     color: #111827;
+    position: relative;
 }
+
+
 
 /* ====================================
    POLAROID CARDS (Featured & Projects)
@@ -144,31 +213,54 @@
 }
 
 .polaroid-card {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     padding: 12px;
     padding-bottom: 40px;
     box-shadow: 
         0 4px 6px rgba(0,0,0,0.1),
-        0 1px 3px rgba(0,0,0,0.08);
-    border: 1px solid rgba(0,0,0,0.05);
+        0 1px 3px rgba(0,0,0,0.08),
+        0 0 0 3px rgba(163, 215, 138, 0.1);
+    border: 3px solid #2d3748;
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.polaroid-card::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(45deg, #A3D78A 0%, #FF5555 50%, #A3D78A 100%);
+    border-radius: 2px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
 .polaroid-card:hover {
-    transform: rotate(0deg) scale(1.02) !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    border-color: rgba(163, 215, 138, 0.4);
+    transform: rotate(0deg) scale(1.05) translateY(-8px) !important;
+    box-shadow: 
+        0 15px 35px rgba(0,0,0,0.2),
+        0 5px 15px rgba(163, 215, 138, 0.3);
+    border-color: #2d3748;
+}
+
+.polaroid-card:hover::before {
+    opacity: 0.3;
 }
 
 .tape-accent {
     position: absolute;
     width: 80px;
     height: 25px;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.8);
     top: -10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 
+        0 2px 4px rgba(0,0,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-left: 2px dashed rgba(0,0,0,0.05);
+    border-right: 2px dashed rgba(0,0,0,0.05);
 }
 
 .polaroid-image {
@@ -188,6 +280,12 @@
 }
 
 .polaroid-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.polaroid-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -227,6 +325,10 @@
     gap: 1.5rem;
 }
 
+.experience-item {
+    margin-bottom: 1.5rem;
+}
+
 .experience-header {
     display: flex;
     flex-direction: column;
@@ -253,7 +355,7 @@
     font-size: 0.875rem;
 }
 
-.experience-stack{
+.experience-stack {
     margin-top: 10px;
     color: #6b7280;
     font-size: 0.75rem;
@@ -284,11 +386,38 @@
 }
 
 .award-card {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(163, 215, 138, 0.4);
+    border: 3px solid #2d3748;
     padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 
+        5px 5px 0 #2d3748,
+        0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.award-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 
+        7px 7px 0 #2d3748,
+        0 8px 12px rgba(0,0,0,0.15);
+}
+
+.award-card::before {
+    content: '★';
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    font-size: 2rem;
+    color: #FF5555;
+    transform: rotate(15deg);
+    animation: starTwinkle 2s ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 1; transform: rotate(15deg) scale(1); }
+    50% { opacity: 0.6; transform: rotate(15deg) scale(1.1); }
 }
 
 .award-section-title {
@@ -357,14 +486,13 @@
 }
 
 .polaroid-card:hover .polaroid-title {
-    color: #A3D78A;
+    color: #000000;
 }
-
 
 /* ====================================
    GEOGUESSER SECTION
    ==================================== */
-   .geoguessr-description {
+.geoguessr-description {
     color: #4b5563;
     font-size: 1rem;
     margin-bottom: 2rem;
@@ -381,16 +509,16 @@
     font-size: 1rem;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
-    border: none;
+    border: 2px solid #2d3748;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(163, 215, 138, 0.3);
+    box-shadow: 4px 4px 0 #2d3748;
 }
 
 .geoguessr-restart-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(163, 215, 138, 0.4);
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 6px 6px 0 #2d3748;
 }
 
 .geoguessr-restart-btn svg {
@@ -405,7 +533,6 @@
 .geoguessr-screen {
     text-align: center;
 }
-
 
 .geoguessr-start-btn {
     display: inline-block;
@@ -431,8 +558,6 @@
     box-shadow: 6px 6px 0 #2d3748;
     background: #4ade80;
 }
-
-
 
 .geoguessr-photo-container {
     margin-bottom: 2rem;
@@ -515,7 +640,6 @@
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-
 .geoguessr-next-btn {
     display: inline-block;
     font-family: 'Indie Flower', cursive;
@@ -528,8 +652,8 @@
     font-weight: 600;
     transition: all 0.2s;
     transform: rotate(-1deg);
-    border: 2px solid #f38686;
-    box-shadow: 4px 4px 0 #f38686;
+    border: 2px solid #2d3748;
+    box-shadow: 4px 4px 0 #2d3748;
     margin: 0 auto;
     display: block;
     width: fit-content;
@@ -537,18 +661,34 @@
 
 .geoguessr-next-btn:hover {
     transform: rotate(-1deg) translateY(-2px);
-    box-shadow: 6px 6px 0 #ff4444;
-    
+    box-shadow: 6px 6px 0 #2d3748;
 }
 
 .geoguessr-end-card {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(163, 215, 138, 0.4);
+    border: 3px solid #2d3748;
     padding: 3rem;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+        6px 6px 0 #2d3748,
+        0 4px 12px rgba(0, 0, 0, 0.1);
     transform: rotate(0.5deg);
+    position: relative;
+}
+
+.geoguessr-end-card::before {
+    content: '🎉';
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-size: 3rem;
+    animation: celebration 1s ease-in-out infinite;
+}
+
+@keyframes celebration {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
 }
 
 .geoguessr-end-title {
@@ -579,8 +719,9 @@
     }
 }
 
-
-/* Modal Styles */
+/* ====================================
+   MODAL STYLES
+   ==================================== */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -601,32 +742,56 @@
 }
 
 .modal-content {
-    background: white;
+    background: #FFF8E7;
     max-width: 500px;
     width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    border: 3px solid #2d3748;
+    box-shadow: 
+        8px 8px 0 #2d3748,
+        0 10px 40px rgba(0, 0, 0, 0.2);
     position: relative;
     padding: 2.5rem;
     margin: 2rem auto;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .modal-close {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: none;
-    border: none;
-    font-size: 1.75rem;
+    background: #FF5555;
+    border: 2px solid #2d3748;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
     cursor: pointer;
-    color: #999;
+    color: white;
     line-height: 1;
     padding: 0;
-    transition: color 0.2s;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 0 #2d3748;
 }
 
 .modal-close:hover {
-    color: #333;
+    transform: scale(1.1) rotate(90deg);
+    background: #ff4444;
+    box-shadow: 3px 3px 0 #2d3748;
 }
 
 .modal-title {

@@ -20,11 +20,11 @@ const photos = [
     {
         image: 'src/istanbul.jpeg',
         location: 'Istanbul, Turkey',
-        fact: 'This one is from when I visited with my dad! The best san sebastian cake you will ever have can be found in a cafe called Viyana (Vienna) right next to the Galata Tower.'
+        fact: 'This one is from when I visited with my dad! The best san sebastian cake you will ever have can be found in a cafe called Viyana right next to the Galata Tower.'
     },
     {
         image: 'src/la.jpeg',
-        location: 'Los Angeles, CA, USA',
+        location: 'Los Angeles, CA',
         fact: 'The California sunrises are as beautiful as the sunsets! My friend and I pulled an all-nighter to catch this in Venice Beach.'    
     },
     {
