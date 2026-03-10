@@ -1,98 +1,48 @@
 /* ====================================
-   BASE STYLES & FONTS
+   CSS VARIABLES
    ==================================== */
-   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, 
-        #FFF8E7 0%,
-        #FFF0D9 50%,
-        #FFE8CC 100%);
-    min-height: 100vh;
-    padding: 2rem 1rem;
-    color: #1f2937;
-    position: relative;
-    overflow-x: hidden;
-}
-
-body::before {
-    content: '';
-    position: fixed;
-    top: -50%;
-    right: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(163, 215, 138, 0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: float 20s ease-in-out infinite;
-    z-index: 0;
-}
-
-body::after {
-    content: '';
-    position: fixed;
-    bottom: -30%;
-    left: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(255, 85, 85, 0.1) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: float 15s ease-in-out infinite reverse;
-    z-index: 0;
-}
-
-@keyframes float {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(20px, -20px) rotate(5deg); }
-    50% { transform: translate(-20px, 20px) rotate(-5deg); }
-    75% { transform: translate(20px, 20px) rotate(5deg); }
-}
-
-.handwritten-name {
-    font-family: 'Permanent Marker', cursive;
-    letter-spacing: 0.02em;
+:root {
+    --bg:            #0d0d0d;
+    --surface:       #141414;
+    --surface-2:     #1c1c1c;
+    --border:        #242424;
+    --border-hover:  #3a3a3a;
+    --text:          #e2e2e2;
+    --text-2:        #999;
+    --text-3:        #555;
+    --accent:        #c4965a;
+    --accent-dim:    rgba(196, 150, 90, 0.1);
 }
 
 /* ====================================
-   TEXTURE & EFFECTS
+   BASE
    ==================================== */
-.texture-overlay {
-    position: fixed;
-    inset: 0;
-    background-image: 
-        radial-gradient(circle at 20% 30%, rgba(163, 215, 138, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(255, 85, 85, 0.03) 0%, transparent 50%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 Q 20 5, 30 10 T 50 10' stroke='%23A3D78A' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3Ccircle cx='15' cy='40' r='2' fill='%23FF5555' opacity='0.1'/%3E%3Cpath d='M40 30 L 45 35 L 40 40' stroke='%23A3D78A' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 100;
-    animation: textureShift 60s linear infinite;
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    color: var(--text);
+    overflow-x: hidden;
 }
 
-@keyframes textureShift {
-    0% { background-position: 0 0; }
-    100% { background-position: 1000px 1000px; }
+.container {
+    max-width: 56rem;
+    margin: 0 auto;
+    position: relative;
+    padding-top: 2rem;
 }
 
 /* ====================================
    INTRO / HERO SECTION
    ==================================== */
 .headshot-frame {
-    margin-top: 220px;
-    width: 140px;
-    height: 140px;
+    margin-top: 180px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     overflow: hidden;
-    border: 4px solid #2d3748;
-    box-shadow: 
-        0 4px 12px rgba(0, 0, 0, 0.15),
-        0 0 0 8px rgba(163, 215, 138, 0.3);
-    background: #f9fafb;
-    position: relative;
-    animation: headshotPulse 3s ease-in-out infinite;
-}
-
-@keyframes headshotPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    border: 2px solid var(--border-hover);
 }
 
 .headshot-img {
@@ -102,27 +52,24 @@ body::after {
 }
 
 .intro-title {
-    font-size: 3.5rem;
+    font-size: 3.25rem;
+    font-weight: 800;
+    color: var(--text);
     margin-bottom: 0.5rem;
-    font-weight: 700;
     line-height: 1.1;
-    transform: rotate(-2deg);
     display: inline-block;
-    color: #111827;
-    position: relative;
-    animation: titleBounce 3s ease-in-out infinite;
+    letter-spacing: -0.02em;
 }
 
-@keyframes titleBounce {
-    0%, 100% { transform: rotate(-2deg) translateY(0); }
-    50% { transform: rotate(-1deg) translateY(-5px); }
+.handwritten-name {
+    color: var(--accent);
 }
 
 .intro-text {
     max-width: 45rem;
-    color: #374151;
-    font-size: 1rem;
-    line-height: 1.7;
+    color: var(--text-2);
+    font-size: 0.975rem;
+    line-height: 1.8;
     margin-bottom: 2rem;
 }
 
@@ -130,321 +77,262 @@ body::after {
     margin-bottom: 1rem;
 }
 
-.looking-text {
-    color: #6b7280;
-    font-style: italic;
-    font-family: 'Indie Flower', cursive;
-    font-size: 1.25rem;
-    transform: rotate(-0.5deg);
+.highlight-accent {
+    color: var(--text);
+    font-weight: 600;
 }
 
-.highlight-green {
-    background: linear-gradient(180deg, transparent 60%, rgba(163, 215, 138, 0.5) 60%);
-    padding: 0 6px;
-}
-
+/* Kept for backward-compat, neutralized */
+.highlight-green,
 .highlight-coral {
-    background: linear-gradient(180deg, transparent 60%, rgba(255, 85, 85, 0.5) 60%);
-    padding: 0 6px;
+    background: none;
+    padding: 0;
 }
 
 .social-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.25rem;
-    margin-top: 2rem;
+    gap: 0.625rem;
+    margin-top: 1.5rem;
 }
 
 .social-link {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #4b5563;
-    transition: all 0.3s ease;
-    background: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    border: 2px solid #2d3748;
-    box-shadow: 3px 3px 0 #2d3748;
+    color: var(--text-2);
+    background: var(--surface);
+    padding: 0.45rem 0.9rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: border-color 0.2s, color 0.2s;
 }
 
 .social-link:hover {
-    color: #A3D78A;
-    transform: scale(1.05) translateY(-2px) !important;
-    box-shadow: 5px 5px 0 #2d3748;
+    border-color: var(--border-hover);
+    color: var(--text);
 }
 
 /* ====================================
    SECTION HEADERS
    ==================================== */
 .section-header {
-    font-size: 2rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
     margin-bottom: 2rem;
-    font-weight: 800;
     display: inline-block;
-    color: #111827;
     position: relative;
+    letter-spacing: -0.01em;
 }
 
-
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: var(--accent);
+}
 
 /* ====================================
-   POLAROID CARDS (Featured & Projects)
+   CARDS
    ==================================== */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
 }
 
 .projects-grid-2x2 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    gap: 1.25rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .projects-grid-2x2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
     .projects-grid-2x2 {
         grid-template-columns: 1fr;
-        max-width: 100%;
     }
 }
 
 .polaroid-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 12px;
-    padding-bottom: 40px;
-    box-shadow: 
-        0 4px 6px rgba(0,0,0,0.1),
-        0 1px 3px rgba(0,0,0,0.08),
-        0 0 0 3px rgba(163, 215, 138, 0.1);
-    border: 3px solid #2d3748;
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.polaroid-card::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    background: linear-gradient(45deg, #A3D78A 0%, #FF5555 50%, #A3D78A 100%);
-    border-radius: 2px;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 .polaroid-card:hover {
-    transform: rotate(0deg) scale(1.05) translateY(-8px) !important;
-    box-shadow: 
-        0 15px 35px rgba(0,0,0,0.2),
-        0 5px 15px rgba(163, 215, 138, 0.3);
-    border-color: #2d3748;
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
 }
 
-.polaroid-card:hover::before {
-    opacity: 0.3;
-}
-
+/* Hide tape accents */
 .tape-accent {
-    position: absolute;
-    width: 80px;
-    height: 25px;
-    background: rgba(255, 255, 255, 0.8);
-    top: -10px;
-    box-shadow: 
-        0 2px 4px rgba(0,0,0,0.1),
-        inset 0 1px 0 rgba(255,255,255,0.5);
-    border: 1px solid rgba(0,0,0,0.1);
-    border-left: 2px dashed rgba(0,0,0,0.05);
-    border-right: 2px dashed rgba(0,0,0,0.05);
+    display: none;
 }
 
 .polaroid-image {
-    aspect-ratio: 4/3;
-    background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-    clip-path: polygon(
-        0% 0%, 2% 1%, 5% 0%, 8% 2%, 11% 0%, 15% 1%, 18% 0%, 22% 1%, 
-        25% 0%, 28% 2%, 32% 0%, 35% 1%, 38% 0%, 42% 2%, 45% 0%, 
-        48% 1%, 52% 0%, 55% 2%, 58% 0%, 62% 1%, 65% 0%, 68% 2%, 
-        72% 0%, 75% 1%, 78% 0%, 82% 2%, 85% 0%, 88% 1%, 92% 0%, 
-        95% 2%, 98% 0%, 100% 1%, 100% 100%, 0% 100%
-    );
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--surface-2);
+    clip-path: none;
 }
 
-.polaroid-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
+.polaroid-image img,
 .polaroid-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
 }
 
-.placeholder-text {
-    color: #9ca3af;
-    font-size: 0.875rem;
-    font-family: 'Indie Flower', cursive;
+.polaroid-card:hover .polaroid-photo {
+    transform: scale(1.04);
 }
 
 .polaroid-caption {
-    text-align: center;
+    padding: 0.75rem 0.875rem;
 }
 
 .polaroid-title {
-    font-size: 1.125rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-    color: #111827;
-    font-family: 'Indie Flower', cursive;
-    font-size: 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+    font-family: 'Inter', sans-serif;
 }
 
 .polaroid-tech {
-    font-size: 0.75rem;
-    color: #6b7280;
-    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: var(--text-3);
+    font-family: 'Courier New', 'Menlo', monospace;
+    letter-spacing: 0.02em;
 }
 
 /* ====================================
    PROFESSIONAL EXPERIENCE
    ==================================== */
-.experience-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.experience-item {
+    border-left: 2px solid var(--border);
+    padding-left: 1.25rem;
+    margin-bottom: 2rem;
+    transition: border-left-color 0.2s;
 }
 
-.experience-item {
-    margin-bottom: 1.5rem;
+.experience-item:hover {
+    border-left-color: var(--accent);
 }
 
 .experience-header {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.15rem;
     margin-bottom: 0.5rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 600px) {
     .experience-header {
         flex-direction: row;
         justify-content: space-between;
-        align-items: start;
+        align-items: flex-start;
     }
 }
 
 .experience-role {
-    font-size: 1.125rem;
+    font-size: 0.975rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--text);
 }
 
 .experience-company {
-    color: #6b7280;
-    font-size: 0.875rem;
-}
-
-.experience-stack {
-    margin-top: 10px;
-    color: #6b7280;
-    font-size: 0.75rem;
-    font-style: italic;
+    font-size: 0.825rem;
+    color: var(--accent);
+    margin-top: 0.1rem;
 }
 
 .experience-date {
-    font-size: 1.25rem;
-    color: #5b5c5e;
-    font-family: 'Indie Flower', cursive;
-    font-size: 1rem;
+    font-size: 0.75rem;
+    color: var(--text-3);
+    font-family: 'Courier New', monospace;
+    white-space: nowrap;
+    margin-top: 0.1rem;
 }
 
 .experience-description {
-    color: #4b5563;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
+    color: var(--text-2);
+    font-size: 0.85rem;
+    line-height: 1.7;
 }
 
 /* ====================================
-   AWARDS & SPEAKING
+   HONORS & FEATURES
    ==================================== */
 .awards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
 }
 
 .award-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border: 3px solid #2d3748;
+    background: var(--surface);
+    border: 1px solid var(--border);
     padding: 1.5rem;
-    box-shadow: 
-        5px 5px 0 #2d3748,
-        0 4px 6px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    position: relative;
+    transition: border-color 0.2s;
 }
 
 .award-card:hover {
-    transform: translateY(-4px) !important;
-    box-shadow: 
-        7px 7px 0 #2d3748,
-        0 8px 12px rgba(0,0,0,0.15);
+    border-color: var(--border-hover);
 }
 
+/* Remove star decoration */
 .award-card::before {
-    content: '★';
-    position: absolute;
-    top: -15px;
-    right: 20px;
-    font-size: 2rem;
-    color: #FF5555;
-    transform: rotate(15deg);
-    animation: starTwinkle 2s ease-in-out infinite;
-}
-
-@keyframes starTwinkle {
-    0%, 100% { opacity: 1; transform: rotate(15deg) scale(1); }
-    50% { opacity: 0.6; transform: rotate(15deg) scale(1.1); }
+    display: none;
 }
 
 .award-section-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #A3D78A;
-    font-family: 'Indie Flower', cursive;
-    font-size: 1.5rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 1.25rem;
 }
 
 .award-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
 }
 
 .award-name {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #111827;
-    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.2rem;
 }
 
 .award-description {
-    color: #6b7280;
-    font-size: 0.75rem;
+    font-size: 0.78rem;
+    color: var(--text-2);
+    line-height: 1.5;
 }
 
 /* ====================================
@@ -452,275 +340,16 @@ body::after {
    ==================================== */
 .footer-text {
     text-align: center;
-    color: #9ca3af;
+    color: var(--text-3);
     font-size: 0.75rem;
-    padding: 1.5rem 0;
+    padding: 2rem 0;
     margin-top: 3rem;
-    border-top: 1px solid #e5e7eb;
-    font-family: 'Indie Flower', cursive;
-    font-size: 0.875rem;
-    transform: rotate(-0.3deg);
+    border-top: 1px solid var(--border);
+    font-family: 'Inter', sans-serif;
 }
 
 /* ====================================
-   RESPONSIVE ADJUSTMENTS
-   ==================================== */
-@media (max-width: 768px) {
-    .intro-title {
-        font-size: 2.5rem;
-    }
-    
-    .section-header {
-        font-size: 1.75rem;
-    }
-    
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.polaroid-card {
-    display: block;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.polaroid-card:hover .polaroid-title {
-    color: #000000;
-}
-
-/* ====================================
-   GEOGUESSER SECTION
-   ==================================== */
-.geoguessr-description {
-    color: #4b5563;
-    font-size: 1rem;
-    margin-bottom: 2rem;
-    text-align: left;
-}
-
-.geoguessr-restart-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 2rem auto 0;
-    background: linear-gradient(135deg, #A3D78A 0%, #8bc774 100%);
-    color: #1f2937;
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border: 2px solid #2d3748;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 4px 4px 0 #2d3748;
-}
-
-.geoguessr-restart-btn:hover {
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 6px 6px 0 #2d3748;
-}
-
-.geoguessr-restart-btn svg {
-    flex-shrink: 0;
-}
-
-.geoguessr-container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.geoguessr-screen {
-    text-align: center;
-}
-
-.geoguessr-start-btn {
-    display: inline-block;
-    font-family: 'Indie Flower', cursive;
-    font-size: 1.2rem;
-    color: #2d3748;
-    background: #48bb78;
-    padding: 0.75rem 2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.2s;
-    transform: rotate(-1deg);
-    border: 2px solid #2d3748;
-    box-shadow: 4px 4px 0 #2d3748;
-    margin: 0 auto;
-    display: block;
-    width: fit-content;
-}
-
-.geoguessr-start-btn:hover {
-    transform: rotate(-1deg) translateY(-2px);
-    box-shadow: 6px 6px 0 #2d3748;
-    background: #4ade80;
-}
-
-.geoguessr-photo-container {
-    margin-bottom: 2rem;
-}
-
-.geoguessr-polaroid {
-    margin: 0 auto;
-    max-width: 500px;
-    position: relative;
-}
-
-.geoguessr-image-wrapper {
-    aspect-ratio: 4/4;
-    overflow: hidden;
-    background: #e5e7eb;
-    position: relative;
-    clip-path: polygon(
-        0% 0%, 2% 1%, 5% 0%, 8% 2%, 11% 0%, 15% 1%, 18% 0%, 22% 1%, 
-        25% 0%, 28% 2%, 32% 0%, 35% 1%, 38% 0%, 42% 2%, 45% 0%, 
-        48% 1%, 52% 0%, 55% 2%, 58% 0%, 62% 1%, 65% 0%, 68% 2%, 
-        72% 0%, 75% 1%, 78% 0%, 82% 2%, 85% 0%, 88% 1%, 92% 0%, 
-        95% 2%, 98% 0%, 100% 1%, 100% 100%, 0% 100%
-    );
-}
-
-.geoguessr-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.geoguessr-timer {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: rgba(255, 85, 85, 0.9);
-    color: white;
-    font-size: 2rem;
-    font-weight: 700;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    font-family: 'Permanent Marker', cursive;
-    z-index: 10;
-}
-
-.geoguessr-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    z-index: 5;
-}
-
-.geoguessr-overlay-content {
-    text-align: center;
-    max-width: 400px;
-}
-
-.geoguessr-location {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 1rem;
-    font-family: 'Indie Flower', cursive;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.geoguessr-fact {
-    color: #f3f4f6;
-    font-size: 1rem;
-    line-height: 1.6;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.geoguessr-next-btn {
-    display: inline-block;
-    font-family: 'Indie Flower', cursive;
-    font-size: 1.2rem;
-    color: white;
-    background: linear-gradient(135deg, #FF5555 0%, #ff4444 100%);
-    padding: 0.75rem 2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.2s;
-    transform: rotate(-1deg);
-    border: 2px solid #2d3748;
-    box-shadow: 4px 4px 0 #2d3748;
-    margin: 0 auto;
-    display: block;
-    width: fit-content;
-}
-
-.geoguessr-next-btn:hover {
-    transform: rotate(-1deg) translateY(-2px);
-    box-shadow: 6px 6px 0 #2d3748;
-}
-
-.geoguessr-end-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border: 3px solid #2d3748;
-    padding: 3rem;
-    border-radius: 12px;
-    box-shadow: 
-        6px 6px 0 #2d3748,
-        0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: rotate(0.5deg);
-    position: relative;
-}
-
-.geoguessr-end-card::before {
-    content: '🎉';
-    position: absolute;
-    top: -20px;
-    right: 20px;
-    font-size: 3rem;
-    animation: celebration 1s ease-in-out infinite;
-}
-
-@keyframes celebration {
-    0%, 100% { transform: rotate(-10deg); }
-    50% { transform: rotate(10deg); }
-}
-
-.geoguessr-end-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 1rem;
-    font-family: 'Indie Flower', cursive;
-}
-
-.geoguessr-end-message {
-    color: #4b5563;
-    font-size: 1.125rem;
-    line-height: 1.6;
-}
-
-@media (max-width: 768px) {
-    .geoguessr-polaroid {
-        max-width: 100%;
-    }
-    
-    .geoguessr-location {
-        font-size: 1.5rem;
-    }
-    
-    .geoguessr-fact {
-        font-size: 0.9rem;
-    }
-}
-
-/* ====================================
-   MODAL STYLES
+   MODAL
    ==================================== */
 .modal-overlay {
     display: none;
@@ -729,7 +358,7 @@ body::after {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.82);
     z-index: 1000;
     padding: 2rem;
     overflow-y: auto;
@@ -742,109 +371,297 @@ body::after {
 }
 
 .modal-content {
-    background: #FFF8E7;
+    background: var(--surface);
+    border: 1px solid var(--border-hover);
     max-width: 500px;
     width: 100%;
-    border-radius: 12px;
-    border: 3px solid #2d3748;
-    box-shadow: 
-        8px 8px 0 #2d3748,
-        0 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
     position: relative;
-    padding: 2.5rem;
+    padding: 2.25rem;
     margin: 2rem auto;
-    animation: modalSlideIn 0.3s ease-out;
+    animation: modalSlideIn 0.2s ease-out;
 }
 
 @keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .modal-close {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: #FF5555;
-    border: 2px solid #2d3748;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
     cursor: pointer;
-    color: white;
-    line-height: 1;
-    padding: 0;
-    transition: all 0.2s;
+    color: var(--text-2);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 2px 2px 0 #2d3748;
+    transition: border-color 0.15s, color 0.15s;
 }
 
 .modal-close:hover {
-    transform: scale(1.1) rotate(90deg);
-    background: #ff4444;
-    box-shadow: 3px 3px 0 #2d3748;
+    border-color: var(--border-hover);
+    color: var(--text);
 }
 
 .modal-title {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.75rem;
+    font-size: 1.35rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #1a1a1a;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+    font-family: 'Inter', sans-serif;
 }
 
 .modal-tech {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    color: #666;
+    font-size: 0.75rem;
+    color: var(--text-3);
+    font-family: 'Courier New', monospace;
     margin-bottom: 1.5rem;
-    font-weight: 500;
 }
 
 .modal-bullets {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: #333;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: var(--text-2);
     list-style: disc;
     padding-left: 1.25rem;
     margin-bottom: 1.75rem;
+    font-family: 'Inter', sans-serif;
 }
 
 .modal-bullets li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .modal-link {
     display: inline-block;
-    font-family: 'Indie Flower', cursive;
-    font-size: 1.2rem;
-    color: #2d3748;
-    background: #48bb78;
-    padding: 0.75rem 2rem;
-    border-radius: 8px;
-    text-decoration: none;
+    font-size: 0.825rem;
     font-weight: 600;
-    transition: all 0.2s;
-    transform: rotate(-1deg);
-    border: 2px solid #2d3748;
-    box-shadow: 4px 4px 0 #2d3748;
-    margin: 0 auto;
-    display: block;
-    width: fit-content;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 0.55rem 1.1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    transition: opacity 0.15s;
 }
 
 .modal-link:hover {
-    transform: rotate(-1deg) translateY(-2px);
-    box-shadow: 6px 6px 0 #2d3748;
-    background: #4ade80;
+    opacity: 0.85;
+}
+
+/* ====================================
+   GEOGUESSR
+   ==================================== */
+.geoguessr-description {
+    color: var(--text-2);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.geoguessr-container {
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+.geoguessr-screen {
+    text-align: center;
+}
+
+.geoguessr-start-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 0.65rem 1.75rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.geoguessr-start-btn:hover {
+    opacity: 0.85;
+}
+
+.geoguessr-photo-container {
+    margin-bottom: 1.25rem;
+}
+
+.geoguessr-polaroid {
+    margin: 0 auto;
+    max-width: 480px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 8px 8px 28px;
+}
+
+.geoguessr-image-wrapper {
+    aspect-ratio: 4 / 4;
+    overflow: hidden;
+    background: var(--surface-2);
+    position: relative;
+    clip-path: none;
+}
+
+.geoguessr-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.geoguessr-timer {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid var(--border-hover);
+    color: var(--text);
+    font-size: 1.4rem;
+    font-weight: 700;
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    font-family: 'Inter', sans-serif;
+}
+
+.geoguessr-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.82);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 5;
+}
+
+.geoguessr-overlay-content {
+    text-align: center;
+    max-width: 360px;
+}
+
+.geoguessr-location {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.geoguessr-fact {
+    color: var(--text-2);
+    font-size: 0.875rem;
+    line-height: 1.65;
+}
+
+.geoguessr-next-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-2);
+    background: var(--surface);
+    padding: 0.55rem 1.25rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-hover);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.geoguessr-next-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.geoguessr-end-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 3rem;
+    border-radius: 4px;
+}
+
+/* Remove party emoji */
+.geoguessr-end-card::before {
+    display: none;
+}
+
+.geoguessr-end-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.geoguessr-end-message {
+    color: var(--text-2);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.geoguessr-restart-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 auto;
+    background: transparent;
+    color: var(--text-2);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid var(--border-hover);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    width: fit-content;
+}
+
+.geoguessr-restart-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ====================================
+   RESPONSIVE
+   ==================================== */
+@media (max-width: 768px) {
+    .intro-title {
+        font-size: 2.25rem;
+    }
+
+    .section-header {
+        font-size: 1.2rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .geoguessr-polaroid {
+        max-width: 100%;
+    }
+
+    .geoguessr-location {
+        font-size: 1.2rem;
+    }
 }

@@ -4,379 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elanu's Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Indie+Flower&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="data.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="texture-overlay"></div>
-        <div id="project-modal" class="modal-overlay">
-            <div class="modal-content">
-                <button class="modal-close" onclick="closeModal()">&times;</button>
-                <h3 id="modal-title" class="modal-title"></h3>
-                <p id="modal-tech" class="modal-tech"></p>
-                <ul id="modal-bullets" class="modal-bullets"></ul>
-                <a id="modal-link" class="modal-link" href="#" target="_blank">View Project →</a>
-            </div>
+
+    <!-- Modal -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h3 id="modal-title" class="modal-title"></h3>
+            <p id="modal-tech" class="modal-tech"></p>
+            <ul id="modal-bullets" class="modal-bullets"></ul>
+            <a id="modal-link" class="modal-link" href="#" target="_blank">View Project →</a>
         </div>
+    </div>
 
+    <div class="container">
 
-    <div class="max-w-4xl mx-auto relative z-10 pt-12">
-        
-        <!-- INTRO/HERO -->
-        <section class="mb-20">
-            <!-- Headshot -->
-            <div class="mb-6">
+        <!-- INTRO / HERO -->
+        <section class="mb-20" style="margin-bottom: 5rem;">
+            <div style="margin-bottom: 1.5rem;">
                 <div class="headshot-frame">
                     <img src="src/1725432892816.jpeg" alt="Elanu" class="headshot-img">
                 </div>
             </div>
 
-            <div class="mb-6">
-                <h1 class="intro-title">
-                    <span>Hi! I'm </span>
-                    <span class="handwritten-name">Elanu.</span>
-                </h1>
-            </div>
-            
+            <h1 class="intro-title">
+                <span>Hi, I'm </span><span class="handwritten-name">Elanu.</span>
+            </h1>
+
             <div class="intro-text">
                 <p>
-                    Studying CS @ Stanford. I've shipped production features to <span class="highlight-green font-semibold">5M+ users</span>, 
-                    built AI tools for companies like Shell, won hackathons, secured <span class="highlight-coral font-semibold">$7K+ in grants</span>, 
-                    and crashed a motorbike on my first ride (the scar's still there). 
+                    Studying CS @ Stanford, building AI that solves real problems. Shipped LLM features to <span class="highlight-accent">5M+ users</span>, won <span class="highlight-accent">$7K+ in grants</span>, and built tools for climate finance, education, and research.
                 </p>
-                
             </div>
 
             <div class="social-links">
-                <a href="https://www.linkedin.com/in/elanu-karakus/" class="social-link" style="transform: rotate(-1deg);">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <a href="https://www.linkedin.com/in/elanu-karakus/" class="social-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                         <rect x="2" y="9" width="4" height="12"></rect>
                         <circle cx="4" cy="4" r="2"></circle>
                     </svg>
-                    <span class="font-medium"></span>
+                    LinkedIn
                 </a>
-                <a href="https://github.com/elnukk/elnukk" class="social-link" style="transform: rotate(1deg);">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <a href="https://github.com/elnukk/elnukk" class="social-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                     </svg>
-                    <span class="font-medium"></span>
+                    GitHub
                 </a>
-                <a href="https://medium.com/@elanu.karakus" class="social-link" style="transform: rotate(-0.5deg);">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <a href="https://medium.com/@elanu.karakus" class="social-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                     </svg>
-                    <span class="font-medium"></span>
+                    Medium
                 </a>
             </div>
         </section>
 
-        <!-- HIGHLIGHTS -->
-        <section class="mb-24">
-            <h2 class="section-header" style="transform: rotate(-1deg);">
-                <span class="highlight-green">Highlights</span>
-            </h2>
-            
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="polaroid-card" style="transform: rotate(-2deg); cursor: pointer;" 
-                     onclick="openModal('MCP for Digital Green', 'FastAPI • Docker • HuggingFace', [
-                         'Built Model Context Protocol server for accessing farm advisory',
-                         'Deployed on HuggingFace Spaces with Docker for scalable access',
-                         'Integrated with Claude Desktop for seamless usage'
-                     ], 'https://huggingface.co/spaces/elanuk/mcp-hf')">
-                    <div class="tape-accent" style="left: 50%; transform: translateX(-50%) rotate(-5deg);"></div>
-                    <div class="polaroid-image">
-                        <img src="src/mcp1.png" alt="MCP for Digital Green" class="polaroid-photo">  
-                    </div>
-                    <div class="polaroid-caption">
-                        <h3 class="polaroid-title">MCP for Digital Green</h3>
-                        <p class="polaroid-tech">FastAPI • Docker • HuggingFace</p>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="polaroid-card" style="transform: rotate(3deg); cursor: pointer;"
-                     onclick="openModal('Aeifloria', 'Product Design • Climate • Grants', [
-                         'Designed smart flower prototype to increase bee pollination rates',
-                         'Secured $5K+ in grants from Earth Prize and Moonshot Pirates',
-                         'Featured on Another Climate Tech Podcast for youth climate innovation'
-                     ], 'https://valiant-peace-959.notion.site/Aeifloria-Smart-Flower-for-Bee-Pollination-Increase-187ee57654ec80b382a4e85ed80b6898')">
-                    <div class="tape-accent" style="right: 1rem; transform: rotate(10deg);"></div>
-                    <div class="polaroid-image">
-                        <img src="src/aei.png" alt="Aeifloria" class="polaroid-photo">
-                    </div>
-                    <div class="polaroid-caption">
-                        <h3 class="polaroid-title">Aeifloria</h3>
-                        <p class="polaroid-tech">Product Design • Climate • Grants</p>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="polaroid-card" style="transform: rotate(-1.5deg); cursor: pointer;"
-                     onclick="openModal('VerifyX', 'LLM • Carbon • Shell', [
-                         'Developed LLM system to automate carbon credit project verification',
-                         'Prototyped solution for Shell to reduce verification time by 40%+'
-                     ], 'https://tksworld.notion.site/Leveraging-LLMs-to-Minimize-the-Time-Needed-for-Carbon-Credit-Project-Verification-by-Elanu-Karakus--6b48432b0ed848fcad6175095ebe65ec')">
-                    <div class="tape-accent" style="left: 1rem; transform: rotate(-8deg);"></div>
-                    <div class="polaroid-image">
-                        <img src="src/nbs.png" alt="VerifyX" class="polaroid-photo">
-                    </div>
-                    <div class="polaroid-caption">
-                        <h3 class="polaroid-title">VerifyX</h3>
-                        <p class="polaroid-tech">Consulting • LLMs • Prototyping</p>
-                    </div>
-                </div>
-            </div>
+        <!-- HIGHLIGHTS — rendered from data.js -->
+        <section style="margin-bottom: 5rem;">
+            <h2 class="section-header">Highlights</h2>
+            <div id="highlights-grid" class="projects-grid"></div>
         </section>
 
-        <!-- PROFESSIONAL EXPERIENCE -->
-        <section class="mb-24">
-            <h2 class="section-header" style="transform: rotate(1deg);">
-                <span class="highlight-coral">Professional Experience</span>
-            </h2>
-
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div>
-                        <h3 class="experience-role">Research Assistant</h3>
-                        <p class="experience-company">Stanford Graduate School of Business</p>
-                    </div>
-                    <span class="experience-date">09/2025 - Present</span>
-                </div>
-                <p class="experience-description">
-                    Studying human-AI interaction in exploratory vs structures tasks, memory use, and mental model mismatches.
-                </p>
-            </div>
-
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div>
-                        <h3 class="experience-role">Product & Software Intern</h3>
-                        <p class="experience-company">Digital Green</p>
-                    </div>
-                    <span class="experience-date">06 – 09/2025</span>
-                </div>
-                <p class="experience-description">
-                    Designed, built, and helped ship 2 user engagement features (nudges + starter prompts) for an app with 5M+ users.
-                </p>
-            </div>
-
-            <div class="experience-list">
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <h3 class="experience-role">AI Intern</h3>
-                            <p class="experience-company">Marketecture</p>
-                        </div>
-                        <span class="experience-date">03 – 05/2025</span>
-                    </div>
-                    <p class="experience-description">
-                        Built a workflow for efficient content management across client accounts.
-                    </p>
-                </div>
-
-            </div>
+        <!-- PROFESSIONAL EXPERIENCE — rendered from data.js -->
+        <section style="margin-bottom: 5rem;">
+            <h2 class="section-header">Professional Experience</h2>
+            <div id="experience-list"></div>
         </section>
 
-        <!-- PROJECTS & EXPERIMENTS -->
-        <section class="mb-24">
-            <h2 class="section-header" style="transform: rotate(-0.5deg);">
-                <span class="highlight-green">Projects & Experiments</span>
-            </h2>
-            
-            <div class="projects-grid-2x2">
-                <div class="polaroid-card" style="transform: rotate(1deg); cursor: pointer;"
-                     onclick="openModal('Docs2Notion', 'Node.js • Vercel', [
-                         'Built converter to seamlessly migrate Google Docs to Notion pages',
-                         'Deployed serverless on Vercel',
-                         'Monthly 400+ visitors since launch on June, 2025'
-                     ], 'https://docs2notion.com/')">>
-                    <div class="tape-accent" style="left: 50%; transform: translateX(-50%) rotate(6deg);"></div>
-                    <div class="polaroid-image">
-                        <img src="src/docs2notion.png" alt="Docs2Notion" class="polaroid-photo">
-                    </div>
-                    <div class="polaroid-caption">
-                        <h3 class="polaroid-title">Docs2Notion</h3>
-                        <p class="polaroid-tech">Node.js • Vercel</p>
-                    </div>
-                </div>
-
-                <div class="polaroid-card" style="transform: rotate(-1.5deg); cursor: pointer;"
-                     onclick="openModal('CESTA Digital Restoration', 'QGIS • React', [
-                         'Created a digital restoration of a map of colonial farms in South Africa',
-                         'Used QGIS for georeferencing',
-                         'Built interactive web interface for exploring the map'
-                     ], 'https://colonial-map.vercel.app/')">
-                    <div class="tape-accent" style="right: 1.5rem; transform: rotate(-7deg);"></div>
-                    <div class="polaroid-image">
-                        <img src="src/cesta.png" alt="CESTA Digital Restoration" class="polaroid-photo">
-                    </div>
-                    <div class="polaroid-caption">
-                        <h3 class="polaroid-title">CESTA Digital Restoration</h3>
-                        <p class="polaroid-tech">QGIS • React</p>
-                    </div>
-                </div>
-
-                <div class="polaroid-card" style="transform: rotate(0.5deg); cursor: pointer;"
-                     onclick="openModal('Beeline Reader x CS51', 'MongoDB • Express • React • Node', [
-                         'Developed a full-stack platform for K-12 students to practice reading comprehension collaboratively',
-                         'Integrated Beeline Reader for improved accessibility',
-                         'Built real-time session synching and routing'
-                     ], '#')">
-                    <div class="tape-accent" style="left: 1rem; transform: rotate(8deg);"></div>
-                    <div class="polaroid-image">
-                        <img src="src/cs51.png" alt="CS51/52 Learning Platform" class="polaroid-photo">
-                    </div>
-                    <div class="polaroid-caption">
-                        <h3 class="polaroid-title">Beeline Reader x CS51</h3>
-                        <p class="polaroid-tech">MongoDB • Express • React • Node</p>
-                    </div>
-                </div>
-
-                <div class="polaroid-card" style="transform: rotate(-0.8deg); cursor: pointer;"
-                     onclick="openModal('CO2 Capture Robot Sim', 'Python • Algorithms • Robotics', [
-                         'Simulated autonomous underwater robot for ocean CO2 capture',
-                         'Implemented pathfinding algorithms for efficient carbon collection'
-                     ], 'https://medium.com/@elanu.karakus/a-magical-fish-captures-co2-in-the-ocean-d92ee3e7d6e8')">
-                    <div class="tape-accent" style="right: 2rem; transform: rotate(-10deg);"></div>
-                    <div class="polaroid-image">
-                        <img src="src/arctic.png" alt="CO2 Capture Robot Simulation" class="polaroid-photo">
-                    </div>
-                    <div class="polaroid-caption">
-                        <h3 class="polaroid-title">CO2 Capture Robot Sim</h3>
-                        <p class="polaroid-tech">Python • Algorithms • Robotics</p>
-                    </div>
-                </div>
-            </div>
+        <!-- PROJECTS & EXPERIMENTS — rendered from data.js -->
+        <section style="margin-bottom: 5rem;">
+            <h2 class="section-header">Projects & Experiments</h2>
+            <div id="projects-grid" class="projects-grid-2x2"></div>
         </section>
 
-
-        <!-- HONORS & FEATURES -->
-        <section class="mb-20">
-            <h2 class="section-header" style="transform: rotate(0.8deg);">
-                <span class="highlight-coral">Honors & Features</span>
-            </h2>
-            
+        <!-- HONORS & FEATURES — rendered from data.js -->
+        <section style="margin-bottom: 5rem;">
+            <h2 class="section-header">Honors & Features</h2>
             <div class="awards-grid">
-                <!-- Honors -->
-                <div class="award-card" style="transform: rotate(-1deg);">
+                <div class="award-card">
                     <h3 class="award-section-title">Honors</h3>
-                    <div class="award-list">
-                        <div>
-                            <h4 class="award-name">TreeHacks Sustainability Winner</h4>
-                            <p class="award-description">Won one of 4 track prizes among 1000 participants with a prototype for a marketplace connecting farmers and buyers.</p>
-                        </div>
-                        <div>
-                            <h4 class="award-name">Earth Prize Scholar</h4>
-                            <p class="award-description">North America Finalist</p>
-                        </div>
-                        <div>
-                            <h4 class="award-name">Moonshot Pirates Winner</h4>
-                            <p class="award-description">Won Shape the Future Challenge.</p>
-                        </div>
-                        <div>
-                            <h4 class="award-name">Rise Fellowship</h4>
-                            <p class="award-description">One of 100 students among 15k+ applications.</p>
-                        </div>
-                        <div>
-                            <h4 class="award-name">Kode With Klossy x Estee Lauder Web Design Challenge Finalist</h4>
-                            <p class="award-description">One of 5 submissions to live demo to Estée Lauder team.</p>
-                        </div>
-                    </div>
+                    <div id="honors-list" class="award-list"></div>
                 </div>
-
-                <!-- Features -->
-                <div class="award-card" style="transform: rotate(1.5deg);">
+                <div class="award-card">
                     <h3 class="award-section-title">Features</h3>
-                    <div class="award-list">
-                        <div>
-                            <h4 class="award-name">UN STEM4ALL Podcast</h4>
-                            <p class="award-description">Topics: Supporting girls in STEM, Gen Z and emerging technologies.</p>
-                        </div>
-                        <div>
-                            <h4 class="award-name">This Week in Voice</h4>
-                            <p class="award-description">Topics: AI and labor, conversational AI, GEN Z and voice AI adoption.</p>
-                        </div>
-                        <div>
-                            <h4 class="award-name">Another Climate Tech Podcast</h4>
-                            <p class="award-description">Topics: Youth engagement, Aeifloria, climate.</p>
-                        </div>
-                        <div>
-                            <h4 class="award-name">TEKNOSA</h4>
-                            <p class="award-description">Presented the project that got me Rise to TEKNOSA partners, Turkey's largest tech commerce firm.</p>
-                        </div>
-                    </div>
+                    <div id="features-list" class="award-list"></div>
                 </div>
             </div>
         </section>
 
-      <!-- GEOGUESSER -->
-      <section class="mb-20">
-        <h2 class="section-header" style="transform: rotate(-0.8deg);">
-            <span class="highlight-green">GeoGuessr</span>
-        </h2>
-        <p class="geoguessr-description">I love GeoGuessr (not that I'm good at it). Here are some photos from my travels—guess the location and I'll tell you the story behind!</p>
-        
-        <div id="geoguessr-container" class="geoguessr-container">
-            <!-- Start Screen -->
-            <div id="start-screen" class="geoguessr-screen">
-                <button id="start-btn" class="geoguessr-start-btn">Start</button>
-            </div>
+        <!-- GEOGUESSR -->
+        <section style="margin-bottom: 5rem;">
+            <h2 class="section-header">GeoGuessr</h2>
+            <p class="geoguessr-description">I love GeoGuessr. Here are some photos from my travels — guess the location and I'll tell you the story behind!</p>
 
-            <!-- Game Screen -->
-            <div id="game-screen" class="geoguessr-screen" style="display: none;">
-                <div class="geoguessr-photo-container">
-                    <div class="polaroid-card geoguessr-polaroid">
-                        <div class="tape-accent" style="left: 50%; transform: translateX(-50%) rotate(-5deg);"></div>
-                        <div class="geoguessr-image-wrapper">
-                            <img id="geoguessr-photo" src="" alt="Guess the location" class="geoguessr-photo">
-                            <div id="timer-display" class="geoguessr-timer">5</div>
-                            
-                            <!-- Reveal Overlay -->
-                            <div id="reveal-overlay" class="geoguessr-overlay" style="display: none;">
-                                <div class="geoguessr-overlay-content">
-                                    <h3 id="location-reveal" class="geoguessr-location"></h3>
-                                    <p id="fact-reveal" class="geoguessr-fact"></p>
+            <div id="geoguessr-container" class="geoguessr-container">
+
+                <!-- Start Screen -->
+                <div id="start-screen" class="geoguessr-screen">
+                    <button id="start-btn" class="geoguessr-start-btn">Start</button>
+                </div>
+
+                <!-- Game Screen -->
+                <div id="game-screen" class="geoguessr-screen" style="display: none;">
+                    <div class="geoguessr-photo-container">
+                        <div class="geoguessr-polaroid">
+                            <div class="geoguessr-image-wrapper">
+                                <img id="geoguessr-photo" src="" alt="Guess the location" class="geoguessr-photo">
+                                <div id="timer-display" class="geoguessr-timer">5</div>
+                                <div id="reveal-overlay" class="geoguessr-overlay" style="display: none;">
+                                    <div class="geoguessr-overlay-content">
+                                        <h3 id="location-reveal" class="geoguessr-location"></h3>
+                                        <p id="fact-reveal" class="geoguessr-fact"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div id="next-btn-container" style="display: none; margin-top: 1.25rem;">
+                        <button id="next-btn" class="geoguessr-next-btn">Next Photo</button>
+                    </div>
                 </div>
 
-                <!-- Next Button (outside photo) -->
-                <div id="next-btn-container" style="display: none; margin-top: 1.5rem;">
-                    <button id="next-btn" class="geoguessr-next-btn">Next Photo</button>
+                <!-- End Screen -->
+                <div id="end-screen" class="geoguessr-screen" style="display: none;">
+                    <div class="geoguessr-end-card">
+                        <h3 class="geoguessr-end-title">That's all!</h3>
+                        <p class="geoguessr-end-message">Thank you for getting to know me :)</p>
+                        <button id="restart-btn" class="geoguessr-restart-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                                <path d="M21 3v5h-5"></path>
+                                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                                <path d="M3 21v-5h5"></path>
+                            </svg>
+                            Restart
+                        </button>
+                    </div>
                 </div>
+
             </div>
-
-            <!-- End Screen -->
-            <div id="end-screen" class="geoguessr-screen" style="display: none;">
-                <div class="geoguessr-end-card">
-                    <h3 class="geoguessr-end-title">That's all!</h3>
-                    <p class="geoguessr-end-message">Thank you for getting to know me :)</p>
-                    <button id="restart-btn" class="geoguessr-restart-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
-                            <path d="M21 3v5h-5"></path>
-                            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
-                            <path d="M3 21v-5h5"></path>
-                        </svg>
-                        Restart
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-                    
-
-        <!-- Footer -->
-        <footer class="footer-text">
-            <p>built despite procrastination</p>
-        </footer>
+        </section>
 
     </div>
 </body>
