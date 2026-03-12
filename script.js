@@ -121,7 +121,7 @@ const photos = [
     {
         image: 'src/paris.jpeg',
         location: 'Paris, France',
-        fact: 'The view from my hostel... Convinced the baker right next door to say "hi" to me in English after a week of "bonjour".'
+        fact: 'The view from my hostel... Felt super lucky to wake up to this everyday during my week-long stay in Paris!'
     },
     {
         image: 'src/lisbon.jpeg',
@@ -141,12 +141,12 @@ const photos = [
     {
         image: 'src/la.jpeg',
         location: 'Los Angeles, CA',
-        fact: 'The California sunrises are as beautiful as the sunsets! My friend and I pulled an all-nighter to catch this in Venice Beach.'
+        fact: 'My friend and I pulled an all-nighter to catch this in Venice Beach.'
     },
     {
         image: 'src/amsterdam.jpeg',
         location: 'Amsterdam, Netherlands',
-        fact: 'Amsterdam has so much to offer...but the best thing it offers is the fries. With truffle. Mmm.'
+        fact: 'Amsterdam has so much to offer...but the best thing it offers is the fries. With truffle.'
     }
 ];
 
