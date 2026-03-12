@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderExperience();
     renderCards('projects-grid', portfolioData.projects);
     renderAwardList('honors-list', portfolioData.honors);
-    renderAwardList('features-list', portfolioData.features);
 });
 
 // ============================================================
