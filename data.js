@@ -136,20 +136,4 @@ const portfolioData = {
     }
   ],
 
-  // --- FEATURES (podcasts, press, talks) ---
-  features: [
-    {
-      name: "UN STEM4ALL Podcast",
-      description: "Discussed supporting girls in STEM and Gen Z engagement with emerging technologies."
-    },
-    {
-      name: "This Week in Voice",
-      description: "Spoke about AI and labor, conversational AI, and Gen Z voice AI adoption patterns."
-    },
-    {
-      name: "Another Climate Tech Podcast",
-      description: "Featured for youth climate innovation and Aeifloria project."
-    }
-  ]
-
 };
