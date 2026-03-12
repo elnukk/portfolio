@@ -149,10 +149,6 @@ const portfolioData = {
     {
       name: "Another Climate Tech Podcast",
       description: "Featured for youth climate innovation and Aeifloria project."
-    },
-    {
-      name: "Google X Moonshot Factory",
-      description: "Presented bee health monitoring project to engineering team."
     }
   ]
 
